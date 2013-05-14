@@ -1,0 +1,62 @@
+body {
+    padding-top: 20px;
+}
+
+.footer {
+    padding-top: 40px;
+}
+
+.categories-portlet.well {
+    padding: 8px 0;
+}
+
+.header .search {
+    text-align: center;
+}
+
+.header .row-fluid {
+    margin-top: 10px;
+}
+
+.header .cart-portlet .portlet-footer {
+    display: none;
+}
+
+body.product .product-images {
+    margin-left: 0;
+}
+
+.shipping-address .control-label label,
+.invoice-address .control-label label,
+.contact-form .control-label label {
+    display: inline;
+}
+
+select {
+    width: auto;
+}
+
+.block {
+    display: block;
+}
+
+.useractions {
+    margin-top: -10px;
+    margin-bottom: 14px;
+}
+
+@media screen and (max-width: 979px) {
+    body {
+        padding-top: 0;
+    }
+    .navbar-fixed-top {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .breadcrumb {
+       margin-right: -20px;
+       margin-left: -20px;
+    }
+}

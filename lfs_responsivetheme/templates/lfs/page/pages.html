@@ -1,0 +1,28 @@
+{% extends "lfs/base.html" %}
+{% load i18n lfs_tags lfs_portlets_tags %}
+
+{% block section %}pages{% endblock %}
+
+{% block breadcrumbs %}
+    {% breadcrumbs _("Information") %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-title">
+        {% trans 'Information' %}
+    </h1>
+
+    {% for page in pages %}
+        <h2 class="page-title">
+            {{ page.title }}
+        </h2>
+        {% if page.short_text %}
+            <div>
+                {{ page.short_text|safe }}
+            </div>
+        {% endif %}
+        <div class="more">
+            <a href="{{ page.get_absolute_url }}">{% trans 'More' %}</a>
+        </div>
+    {% endfor %}
+{% endblock %}

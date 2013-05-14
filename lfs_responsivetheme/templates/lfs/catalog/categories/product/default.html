@@ -1,0 +1,91 @@
+{% load i18n lfs_tags %}
+
+{% block products-header %}
+<h1 class="first-heading page-header">
+    {{ category.name }}
+</h1>
+<div class="description">
+    {{ category.description|safe }}
+</div>
+{% endblock %}
+
+<div class="row-fluid">
+    {% include "lfs/catalog/categories/product/products_navigation.html" %}
+
+    <div class="pull-right clearfix">
+        {% sorting %}
+    </div>
+</div>
+
+<div id="products">
+    <div class="lfs-default row-fluid">
+        {% for col in products %}
+        <ul class="product-row thumbnails clearfix">
+            {% for product in col %}
+                <li class="product-data span{% widthratio 12 col|length 1 %}">
+                    <div >
+                        <div class="thumbnailzz">
+                            <a href="{% url lfs.catalog.views.product_view product.slug %}">
+                                {% if product.image.url_300x300 %}
+                                    <img alt="{{ product.name }}" class="img-rounded"
+                                         src="{{ product.image.url_300x300 }}" />
+                               {% endif %}
+                            </a>
+                        </div>
+                        <div class="caption">
+                            <h3 class="product-title">
+                                <a href="{% url lfs.catalog.views.product_view product.slug %}">
+                                    {{ product.name }}
+                                </a>
+                            </h3>
+                            <div class="product-description">{{ product.obj.get_short_description|safe }}</div>
+
+                            {% category_product_prices_gross product.obj.id %}
+         
+                            <div class="product-price">
+                                {% if price_starting_from %}
+                                    {% trans "Starting at" %}
+                                {% endif %}
+                                {% if product.obj.get_for_sale %}
+                                   <span class="for-sale-standard-price">{{ standard_price|currency:request }}*</span>
+                                   <span class="for-sale-price">{{ price|currency:request }}*</span>
+                                {% else %}
+                                   <span class="standard-price">{{ price|currency:request }}*</span>
+                                {% endif %}
+                                {% if product.price_unit %}
+                                    / {{ product.price_unit }}
+                                {% endif %}
+                                {% if product.obj.get_active_packing_unit %}
+                                    <div class="base-price">
+                                        {{ base_packing_price|currency:request }}* / {{ product.obj.get_packing_info.1 }}
+                                    </div>
+                                {% endif %}
+                                {% if product.obj.get_active_base_price %}
+                                    <div class="base-price">
+                                        {% if base_price_starting_from %}
+                                            {% trans "Starting at" %}
+                                        {% endif %}
+                                        {{ base_price|currency:request }}*
+                                        {% if product.obj.get_base_price_unit %}
+                                            / {{ product.obj.get_base_price_unit }}
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                                <div class="price-disclaimer">
+                                    {% if product.price_includes_tax %}
+                                        {% trans '*inc. VAT' %}
+                                    {% else  %}
+                                        {% trans '*exc. VAT' %}
+                                   {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,274 @@
+{% extends "lfs/base.html" %}
+{% load i18n lfs_tags %}
+
+{% block title %}
+    {% trans 'Checkout' %} - {{ block.super }}
+{% endblock %}
+
+{% block section %}checkout{% endblock %}
+
+{% block breadcrumbs %}
+    {% breadcrumbs _("Checkout") %}
+{% endblock %}
+
+{% block wrapper %}
+    {% if form.errors %}
+        <div class="form-errors">
+            {% trans "The operation could not be performed because one or more errors occurred. Please see below." %}
+        </div>
+    {% endif %}
+    <div>
+        <form class="checkout-form postal-address"
+              method="post"
+              data="{% url lfs_changed_checkout %}"
+              invoice="{% url lfs_changed_invoice_country %}"
+              shipping="{% url lfs_changed_shipping_country %}">
+            {% csrf_token %}
+            <table class="lfs-default table">
+                <thead>
+                    <tr>
+                        <th>
+                            {% trans 'Invoice address' %}
+                        </th>
+                        <th>
+                            {% trans 'Shipping address' %}
+                            ({{ checkout_form.no_shipping }}
+                             {{ checkout_form.no_shipping.label_tag }})
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {# Invoice Address #}
+                        <td width="50%" id="invoice-address-inline">
+                            {{ invoice_address_inline|safe }}
+                        </td>
+
+                        {#  Shipping Address #}
+                        <td width="50%">
+                            <div class="shipping-address" id="shipping-address-inline">
+                               {{ shipping_address_inline|safe }}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            {# Shipping #}
+            <div class="shipping">
+                <h2>{% trans 'Shipping' %}</h2>
+                <div id="shipping-inline">
+                    {{ shipping_inline|safe }}
+                </div>
+            </div>
+
+            {# Payment #}
+            <div class="payment">
+                <div id="payment-inline">
+                    {{ payment_inline|safe }}
+                </div>
+            </div>
+
+            {% if display_credit_card %}
+                 <table id="credit-card">
+                     <tr>
+                         <th colspan="2">
+                             {% trans 'Please enter your credit card information' %}
+
+                            {% if credit_card_form.errors.credit_card %}
+                                <ul class="errorlist">
+                                    <li>{{ credit_card_form.errors.credit_card }}</li>
+                                </ul>
+                            {% endif %}
+
+                             <noscript>
+                                 <div class="discreet">
+                                     ({% trans 'Only necessary when the payment method is direct debit' %})
+                                 </div>
+                             </noscript>
+                         </th>
+                    </tr>
+                     <tr>
+                         <td class="label"
+                             colspan="2">
+                             {{ credit_card_form.type.errors }}
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="label">
+                             {{ credit_card_form.type.label_tag }}:
+                         </td>
+                         <td>
+                             {{ credit_card_form.type }}
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="label"
+                             colspan="2">
+                             {{ credit_card_form.owner.errors }}
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="label">
+                             {{ credit_card_form.owner.label_tag }}:
+                         </td>
+                         <td>
+                             {{ credit_card_form.owner }}
+                         </td>
+                     </tr>
+
+                     <tr>
+                         <td class="label"
+                             colspan="2">
+                             {{ credit_card_form.number.errors }}
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="label">
+                             {{ credit_card_form.number.label_tag }}:
+                         </td>
+                         <td>
+                             {{ credit_card_form.number }}
+                         </td>
+                     </tr>
+
+                     <tr>
+                         <td class="label">
+                             <label>{% trans "Expiration date" %}:</label>
+                         </td>
+                         <td>
+                             {{ credit_card_form.expiration_date_month }} {{ credit_card_form.expiration_date_year }}
+                         </td>
+                     </tr>
+
+                     <tr>
+                         <td class="label"
+                             colspan="2">
+                             {{ credit_card_form.verification.errors }}
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="label">
+                             {{ credit_card_form.verification.label_tag }}:
+                         </td>
+                         <td>
+                             {{ credit_card_form.verification }}
+                         </td>
+                     </tr>
+
+                </table>
+            {% endif %}
+            {% if display_bank_account %}
+                <table id="bank-account">
+                    <tr>
+                        <th colspan="2">
+                            {% trans 'Please enter your bank information' %}
+                            <noscript>
+                                <div class="discreet">
+                                    ({% trans 'Only necessary when the payment method is direct debit' %})
+                                </div>
+                            </noscript>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="label"
+                            colspan="2">
+                            {{ bank_account_form.account_number.errors }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            {{ bank_account_form.account_number.label_tag }}:
+                        </td>
+                        <td>
+                            {{ bank_account_form.account_number }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"
+                            colspan="2">
+                            {{ bank_account_form.bank_identification_code.errors }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            {{ bank_account_form.bank_identification_code.label_tag }}:
+                        </td>
+                        <td>
+                            {{ bank_account_form.bank_identification_code }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"
+                            colspan="2">
+                            {{ bank_account_form.bank_name.errors }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            {{ bank_account_form.bank_name.label_tag }}:
+                        </td>
+                        <td>
+                            {{ bank_account_form.bank_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"
+                            colspan="2">
+                            {{ bank_account_form.depositor.errors }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            {{ bank_account_form.depositor.label_tag }}:
+                        </td>
+                        <td>
+                            {{ bank_account_form.depositor }}
+                        </td>
+                    </tr>
+                </table>
+            {% endif %}
+
+            {# Cart #}
+            <div id="cart-inline">
+                {{ cart_inline }}
+            </div>
+
+            {# Message #}
+            <div id="checkout-message">
+                {% lfs_form checkout_form.message %}
+            </div>
+
+            {% if SHOP.confirm_toc %}
+                {% if checkout_form.errors.confirm_toc %}
+                    <ul class="errorlist">
+                        <li>{{ checkout_form.errors.confirm_toc }}</li>
+                    </ul>
+                {% endif %}
+
+                <input type="checkbox" name="confirm_toc" id="confirm_toc" />
+                <label for="confirm_toc">{% trans "Please confirm our terms and conditions" %}</label>
+            {% endif %}
+
+            <div class="right">
+                <button class="button emphasized"
+                        type="submit">
+                    {% trans 'Submit order' %}
+                </button>
+                <a class="button"
+                   href="{% url lfs.cart.views.cart %}">{% trans 'Go to cart' %}</a>
+            </div>
+
+            {% if request.user.is_anonymous %}
+                <input type="hidden"
+                       name="is_anonymous"
+                       value="1" />
+            {% else %}
+                <input type="hidden"
+                       name="is_anonymous"
+                       value="0" />
+            {% endif %}
+
+        </form>
+    </div>
+{% endblock %}

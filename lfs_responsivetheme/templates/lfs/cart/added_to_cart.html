@@ -1,0 +1,85 @@
+{% extends "lfs/base.html" %}
+{% load i18n %}
+{% load lfs_tags %}
+
+{% block section %}added-to-cart{% endblock %}
+{% block left-slot-wrapper %}{% endblock %}
+{% block right-slot-wrapper %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% breadcrumbs _("Added to cart") %}
+{% endblock %}
+
+{% block wrapper %}
+    <h1>{% blocktrans count counter=cart_items_count %}This product has been added to cart{% plural %}These products have been added to cart{% endblocktrans %}</h1>
+
+    <div id="cart-items">
+        {{ cart_items }}
+    </div>
+
+    {% if product_accessories %}
+        <h3>{% trans 'Accessories' %}</h3>
+        <table class="accessories lfs-default table">
+            <thead>
+                <tr>
+                    <th>
+                        {% trans 'Name' %}
+                    </th>
+                    <th class="number">
+                        {% trans 'Quantity' %}
+                    </th>
+                    <th class="number">
+                        {% trans 'Price' %}
+                    </th>
+                    <th class="number">
+                        {% trans 'Total' %}
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product_accessory in product_accessories %}
+                    <tr>
+                        <td>
+                            <a href="{{ product_accessory.accessory.get_absolute_url }}">
+                                {{ product_accessory.accessory.get_name }}
+                            </a>
+                        </td>
+                        <td class="number">
+                            {{ product_accessory.quantity|quantity }}
+                        </td>
+                        <td class="number">
+                            {{ product_accessory.accessory.get_price|currency:request }}
+                        </td>
+                        <td class="number">
+                            {{ product_accessory.get_price|currency:request }}
+                        </td>
+                        <td class="right">
+                            <a class="button add-accessory-link"
+                               rel="nofollow"
+                               href="{% url lfs_add_accessory_to_cart product_accessory.accessory.id product_accessory.quantity %}">
+                               {% trans 'Add' %}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <div class="buttons">
+        <a class="button checkout-button emphasized"
+           href="{% url lfs_checkout_dispatcher %}">
+            {% trans 'Checkout' %}
+        </a>
+        <a class="button cart-button"
+           href="{% url lfs.cart.views.cart %}">
+            {% trans 'Go to cart' %}
+        </a>
+        <a class="button shopping-button"
+           href="{{ shopping_url }}">
+            {% trans 'Go on shopping' %}
+        </a>
+    </div>
+
+{% endblock %}

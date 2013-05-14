@@ -1,0 +1,86 @@
+{% extends "lfs/base.html" %}
+{% load i18n %}
+{% load lfs_tags %}
+
+{% block title %}
+    {% trans 'Login' %} - {{ block.super }}
+{% endblock %}
+
+{% block section %}customer-login{% endblock %}
+
+{% block breadcrumbs %}
+    {% breadcrumbs _("Login") %}
+{% endblock %}
+
+{% block wrapper %}
+    <h1 class="">
+        {% trans 'Please select!' %}
+    </h1>
+    <div class="container">
+    <div class="login span6">
+        <h2 class="authenticate">{% trans 'Login' %}</h2>
+
+        <div class="description">
+            {% trans 'If you are already customer you can login. Your address data will be stored in your account.' %}
+        </div>
+
+        <form class="authenticate"
+              action="{% url lfs_login %}"
+              method="post">
+            {% csrf_token %}
+
+            <div class="form-wrapper">
+                <div class="form">
+                    {{ login_form }}
+                </div>
+            </div>
+
+            <input type="hidden"
+                   name="action"
+                   value="login" />
+
+            <input type="hidden"
+                   name="next"
+                   value="{{ next_url }}" />
+
+            <button type="submit"
+                    class="button login-button emphasized left">{% trans 'Login' %}</button>
+            <a class="forgot-password-link" href="{% url lfs_password_reset %}">{% trans 'Forgot password?' %}</a>
+        </form>
+    </div>
+
+    {% if not ANON_ONLY %}
+        <div class="register span6">
+            <h2 class="authenticate">{% trans 'Register' %}</h2>
+
+            <div class="description">
+                {% trans 'If you are not already a customer you can register in order to store your address data and to follow the state of your orders.' %}
+            </div>
+
+            <form action="{% url lfs_login %}"
+                  method="post">
+                    {% csrf_token %}
+                    <div class="form-wrapper">
+                        <div class="form">
+                            {{ register_form }}
+                        </div>
+                    </div>
+                    <input type="hidden"
+                           name="action"
+                           value="register" />
+
+                    <input type="hidden"
+                           name="next"
+                           value="{{ next_url }}" />
+
+                    <button type="submit"
+                            class="button register-button emphasized left">{% trans "Register" %}</button>
+            </form>
+        </div>
+    {% endif %}
+    </div>
+<script type="text/javascript">
+$("#id_username").focus();
+</script>
+{% endblock %}
+

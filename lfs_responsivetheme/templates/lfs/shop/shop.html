@@ -1,0 +1,27 @@
+{% extends "lfs/base.html" %}
+{% load i18n %}
+
+{% block head %}
+    {% if shop.get_meta_keywords %}
+        <meta name="keywords" content="{{ shop.get_meta_keywords }}" />
+    {% endif %}
+    {% if shop.get_meta_description %}
+        <meta name="description" content="{{ shop.get_meta_description }}" />
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+<!--
+        <li>{% trans 'You are here:' %}</li>
+-->
+        <li>
+            {% trans 'Home' %}
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    {{ shop.static_block.html|safe }}
+    {{ shop.description|safe }}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "lfs/base.html" %}
+{% load i18n lfs_tags lfs_portlets_tags %}
+
+{% block title %}
+    {{ page.get_meta_title }} - {{ block.super }}
+{% endblock %}
+
+{% block head %}
+    {% if page.get_meta_keywords %}
+        <meta name="keywords" content="{{ page.get_meta_keywords }}" />
+    {% endif %}
+    {% if page.get_meta_description %}
+        <meta name="description" content="{{ page.get_meta_description }}" />
+    {% endif %}
+{% endblock %}
+
+{% block section %}page{% endblock %}
+
+{% block breadcrumbs %}
+    {% breadcrumbs page %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="first-heading">
+        {{ page.title }}
+    </h1>
+    <div>
+        {{ page.body|safe }}
+    </div>
+
+    {% if page.file %}
+        <a href="{{page.file.url}}">
+            {% trans "Download" %}
+        </a>
+    {% endif %}
+{% endblock %}

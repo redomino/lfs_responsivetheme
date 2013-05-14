@@ -1,0 +1,217 @@
+{% load i18n %}
+{% load lfs_tags %}
+{% load lfs_theme_tags %}
+{% load lfs_portlets_tags %}
+{% load compress %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <title>{% block title %}{{ SHOP.get_meta_title }}{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/ico" />
+
+        {% block head %}{% endblock %}
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+        <meta name="generator" content="LFS - http://www.getlfs.com" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        
+        <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet" >
+        <link href="{{ STATIC_URL }}css/lfs-theme.css" rel="stylesheet" media="screen">
+
+
+        <!--[if IE]>
+            {% compress css %}
+                <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/iefixes.css" />
+            {% endcompress %}
+        <![endif]-->
+
+
+    </head>
+    <body class="{% block section %}lfs{% endblock %} {% ifequal request.path '/' %}home-page{% endifequal %} container">
+        <div class="header visible-desktop">
+            <div class="container row-fluid">
+                {% block header %}
+                    <div class="span4 logo">
+                        <a href="{% url lfs.core.views.shop_view %}">
+                            <img class="logo"
+                                 src="{{ STATIC_URL }}img/logo.jpg"
+                                 alt="Logo" />
+                        </a>
+                    </div>
+                    <div class="span4 search">
+                        {% include "lfs/search_form.html" %}
+                    </div>
+                    <div class="span4 cart">
+                        <div class="pull-right">
+                        {% include "lfs/user_actions.html" %}
+
+                        {% block header_cart %}
+                            {% lfs_cart_portlet %}
+                        {% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+            <div class="container livesearch-wrapper">
+                 <div id="livesearch-result"></div>
+            </div>
+        </div>
+
+        <div class="header hidden-desktop">
+            <div class="">
+                {% block mobile_header %}
+
+                    <div >
+                        <div class="navbar navbar-fixed-top" >
+                            <div class="navbar-inner" id="mobile-navbar">
+                                <a href="{% url lfs.core.views.shop_view %}" class="brand">{{ SHOP.get_meta_title }}</a>
+                                <div class="btn-group pull-right" data-toggle="buttons-radio">
+                                <button data-target=".user-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
+                                    <span class="icon-user"></span>           
+                                </button>
+                                <button data-target=".search-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
+                                    <span class="icon-search"></span>
+                                </button>
+                                <button data-target=".cart-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
+                                    <span class="icon-briefcase"></span>
+                                </button>
+                                <button data-target=".nav-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
+                                    <span class="icon-list"></span>
+                                </button>
+                                </div>
+
+                                <div class="accordion-group" style="border:none;">
+                                    <div class="nav-collapse accordion-body collapse">
+                                       {% menu_top_level_categories %}
+                                    </div>
+
+                                    <div class="search-collapse accordion-body collapse">
+                                        {% include "lfs/search_form.html" %}
+                                    </div>
+                                    <div class="cart-collapse accordion-body collapse">
+                                       {% lfs_cart_portlet %}
+                                    </div>
+                                    <div class="user-collapse accordion-body collapse">
+                                       {% include "lfs/user_actions.html" %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+            <div class="container livesearch-wrapper">
+                 <div id="livesearch-result"></div>
+            </div>
+        </div>
+
+
+<!--
+        <div class="navbar">
+            <div class="navbar-inner">
+                {% block tabs %}
+                    {% tabs %}
+                {% endblock %}
+            </div>
+        </div>
+-->
+
+        <div class="navbar visible-desktop">
+            <div class="navbar-inner">
+                {% block top_level_categories %}
+                        {% menu_top_level_categories %}
+                {% endblock %}
+            </div>
+        </div>
+
+        {% block breadcrumbs %}{% endblock %}
+
+        <div class="container">
+            <div class="row-fluid">
+                {% slots_information %}
+
+                {% block wrapper %}
+                    {% block left-slot-wrapper %}
+                        {% if SlotLeft %}
+                            <div class="span3 bs-docs-sidebar hidden-phone">
+                                <div class="left-slot">
+                                    {% block left-slot %}
+                                        {% lfs_portlet_slot 'Left' %}
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                    <div class="{{ content_class }}">
+                        <div class="middle-slot">
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                    {% block right-slot-wrapper %}
+                        {% if SlotRight %}
+                            <div class="span-4 last hidden-phone">
+                                <div class="right-slot">
+                                    {% block right-slot %}
+                                        {% lfs_portlet_slot 'Right' %}
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div class="footer row-fluid">
+            <div class="container">
+                {% block footer %}
+                    {% actions Footer %}
+                    {% for action in actions %}
+                        <a href="{{ action.link }}">{{ action.title }}</a>
+                        {% if not forloop.last %}|{% endif %}
+                    {% endfor %}
+                {% endblock %}
+            </div>
+        </div>
+
+
+        <div class="colophon row-fluid">
+            <div class="container">
+                {% block colophon %}
+                    <p>{% trans 'Powered by' %} <a target="_blank" href="http://www.getlfs.com">LFS</a> &mdash; Lightning Fast Shop</p>
+                    <p>
+                        &copy; 2009 - 2011 {% trans 'by' %} Kai Diefenbach and contributors &mdash; {% trans 'All rights reserved' %}
+                    </p>
+                    <p>{% trans 'Distributed under the' %} <a target="_blank" href="http://www.opensource.org/licenses/bsd-license.php">{% trans 'BSD-License' %}</a></p>
+                {% endblock %}
+            </div>
+        </div>
+
+        {% compress js %}
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery-1.7.2.min.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery-ui-1.8.13.custom/js/jquery-ui-1.8.13.custom.min.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery.form.pack.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery.jgrowl_minimized.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery.cookie.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery/lightbox/jquery.lightbox-0.5.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}js/lfs.js"></script>
+            <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+            <script src="{{ STATIC_URL }}js/modernizr.js"></script>
+        {% endcompress %}
+
+        {% block google-analytics-tracking %}
+            {% google_analytics_tracking %}
+        {% endblock %}
+
+        {% block google-analytics-ecommerce %}{% endblock %}
+
+    </body>
+</html>

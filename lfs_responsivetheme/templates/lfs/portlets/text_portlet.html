@@ -1,0 +1,8 @@
+<div class="portlet static-text">
+    {% if title %}<div class="portlet-header popover-title">
+        {{ title }}
+    </div>{% endif %}
+    <div class="portlet-body popover-content">
+        {{ text|safe }}
+    </div>
+</div>

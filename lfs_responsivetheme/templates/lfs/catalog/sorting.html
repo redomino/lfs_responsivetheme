@@ -1,0 +1,17 @@
+{% load i18n %}
+<div class="sorting">
+    <form action="{% url lfs_catalog_set_sorting %}"
+          method="post">
+        {% csrf_token %}
+        <select name="sorting"
+                onchange="this.form.submit()">
+            {% for item in sort_options %}
+            <option value="{{ item.default }}"
+                {% ifequal item.default current %}selected="selected"{% endifequal %}>{{ item.title }}</option>
+            {% endfor %}
+        </select>
+        <noscript>
+            <input type="submit" value="{% trans 'Go!' %}" />
+        </noscript>
+    </form>
+</div>

@@ -1,0 +1,83 @@
+{% extends "lfs/customer/base.html" %}
+{% load i18n %}
+{% load lfs_tags %}
+
+{% block title %}
+    {% trans 'Your orders' %} - {{ block.super }}
+{% endblock %}
+
+{% block section %}my-orders{% endblock %}
+
+{% block breadcrumbs %}
+    {% breadcrumbs _("Your orders") %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Your orders' %}</h1>
+
+    {% if not date_filter and not orders %}
+        <p>
+            {% trans "You haven't any orders yet." %}
+        </p>
+    {% else %}
+        <div class="site-actions">
+            <form action="{% url lfs_my_orders %}"
+                  method="post">
+                {% csrf_token %}
+                <select name="date-filter">
+                    <option value="">{% trans 'All' %}</option>
+                    {% for option in options %}
+                        <option value="{{ option.value }}" {% if option.selected %}selected="selected"{% endif %}>{% blocktrans count counter=option.value %}{{ counter }} month{% plural %}{{ counter }} months{% endblocktrans %}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit"
+                       value="{% trans 'Filter' %}">
+            </form>
+        </div>
+
+        <table class="order lfs-default">
+            <thead>
+                <tr>
+                    <th>
+                        {% trans 'Number' %}
+                    </th>
+                    <th>
+                        {% trans 'Date' %}
+                    </th>
+                    <th class="number">
+                        {% trans 'Price' %}
+                    </th>
+                    <th class="right">
+                        {% trans 'State' %}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>
+                            <a href="{% url lfs_my_order order.id %}">{{ order.number|default_if_none:"-" }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url lfs_my_order order.id %}">
+                                {{ order.created|date:_("DATETIME_FORMAT") }}
+                            </a>
+                        </td>
+                        <td class="number">
+                            {{ order.price|currency:request }}
+                        </td>
+                        <td class="right">
+                            {{ order.get_state_display }}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr colspan="3">
+                        <td>
+                            {% trans "There are no orders for this time range." %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,64 @@
+<div id="invoice-address-inline">
+	<div class="invoice-address">
+	    <div class="control-group"> 
+	        <div class="control-label">
+	            {{ form.invoice_firstname.label_tag }}*:
+	        </div>
+            <div class="controls">
+            	{{ form.invoice_firstname.errors }}
+                {{ form.invoice_firstname }}
+            </div>
+	    </div>
+	    <div class="control-group">
+	        <div class="control-label">
+                {{ form.invoice_lastname.label_tag }}*:
+            </div>
+            <div class="controls">
+            	{{ form.invoice_lastname.errors }}
+                {{ form.invoice_lastname }}
+            </div>
+	    </div>
+        <div class="control-group">
+            <div class="control-label">
+                {{ form.invoice_company_name.label_tag }}{% if settings.LFS_INVOICE_COMPANY_NAME_REQUIRED %}*{% endif %}:
+            </div>
+            <div class="controls">
+                {{ form.invoice_company_name.errors }}
+                {{ form.invoice_company_name }}
+            </div>
+        </div>
+        {% for field in address_form %}
+            <div class="control-group">
+                <div class="control-label">
+                    {{ field.label_tag }}{% if field.field.required %}*{% endif %}:
+                </div>
+                <div class="controls">
+                    {{ field.errors }}
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+		{% if request.user.is_anonymous %}
+		    <div class="control-group">
+		        <div class="control-label">
+		                {{ form.invoice_email.label_tag }}{% if settings.LFS_INVOICE_EMAIL_REQUIRED %}*{% endif %}:
+		        </div>
+		        <div class="controls">
+                    {{ form.invoice_email.errors }}
+		            {{ form.invoice_email }}
+		       </div>
+		    </div>
+	    {% endif %}
+	    {% if form.invoice_phone %}
+		    <div class="control-group">
+		        <div class="control-label">
+		            {{ form.invoice_phone.label_tag }}{% if settings.LFS_INVOICE_PHONE_REQUIRED %}*{% endif %}:
+		        </div>
+		        <div class="controls">
+		        	{{ form.invoice_phone.errors }}
+		            {{ form.invoice_phone }}
+		        </div>
+		    </div>
+	    {% endif %}
+	</div>
+</div>

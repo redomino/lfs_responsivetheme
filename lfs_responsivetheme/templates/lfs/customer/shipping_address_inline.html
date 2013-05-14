@@ -1,0 +1,64 @@
+<div id="shipping-address-inline">
+    <div class="shipping-address">
+        <div class="control-group">
+            <div class="control-label">
+                {{ form.shipping_firstname.label_tag }}*:
+            </div>
+            <div class="controls">
+                {{ form.shipping_firstname.errors }}
+                {{ form.shipping_firstname }}
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="control-label">
+                {{ form.shipping_lastname.label_tag }}*:
+            </div>
+            <div class="controls">
+                {{ form.shipping_lastname.errors }}
+                {{ form.shipping_lastname }}
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="control-label">
+                {{ form.shipping_company_name.label_tag }}{% if settings.LFS_INVOICE_COMPANY_NAME_REQUIRED %}*{% endif %}:
+            </div>
+            <div class="controls">
+                {{ form.shipping_company_name.errors }}
+                {{ form.shipping_company_name }}
+            </div>
+        </div>
+        {% for field in address_form %}
+            <div class="control-group">
+                <div class="control-label">
+                    {{ field.label_tag }}{% if field.field.required %}*{% endif %}:
+                </div>
+                <div class="controls">
+                    {{ field.errors }}
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+        {% if request.user.is_anonymous %}
+           <div class="control-group">
+                <div class="control-label">
+                    {{ form.shipping_email.label_tag }}{% if settings.LFS_SHIPPING_EMAIL_REQUIRED %}*{% endif %}:
+                </div>
+                <div class="controls">
+                    {{ form.shipping_email.errors }}
+                    {{ form.shipping_email }}
+                </div>
+           </div>
+       {% endif %}
+       {% if form.shipping_phone %}
+            <div class="control-group">
+                <div class="control-label">
+                    {{ form.shipping_phone.label_tag }}{% if settings.LFS_SHIPPING_PHONE_REQUIRED %}*{% endif %}:
+                </div>
+                <div class="controls">
+                    {{ form.shipping_phone.errors }}
+                    {{ form.shipping_phone }}
+                </div>
+            </div>
+       {% endif %}
+    </div>
+</div>
