@@ -9,7 +9,7 @@ from lfs_responsivetheme import __version__
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.txt')).read()
 
-setup(name='lfs_themeresponsive',
+setup(name='lfs_responsivetheme',
       version=__version__,
       description='A responsive theme for LFS',
       long_description=README,
