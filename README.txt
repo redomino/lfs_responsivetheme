@@ -1,4 +1,4 @@
-Introducion
+Introduction
 ===========
 
 This is a responsive theme for LFS based on twitter bootstrap.
