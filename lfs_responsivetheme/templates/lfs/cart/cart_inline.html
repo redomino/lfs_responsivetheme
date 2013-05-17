@@ -285,11 +285,11 @@
             <tr>
                 <td colspan="8">
                     <div class="buttons">
-                        <a class="button checkout-button emphasized"
+                        <a class="btn"
                            href="{% url lfs_checkout_dispatcher %}">
                            {% trans 'Checkout' %}
                         </a>
-                        <a class="button shopping-button"
+                        <a class="btn"
                            href="{{ shopping_url }}">
                             {% trans 'Go on shopping' %}
                         </a>
@@ -302,7 +302,7 @@
     <h1 class="title">
         {% trans 'Your Cart is empty' %}
     </h1>
-    <a class="button emphasized left"
+    <a class="btn"
        href="{{ shopping_url }}">
        {% trans 'Go on shopping' %}
     </a>

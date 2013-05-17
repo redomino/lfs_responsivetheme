@@ -43,7 +43,7 @@
                    value="{% url lfs_checkout %}" />
 
             <button type="submit"
-                    class="button checkout-button emphasized left"
+                    class="btn"
                     href="{% url lfs_checkout %}">{% trans 'Login' %}</button>
             <a class="forgot-password-link" href="{% url lfs_password_reset %}">{% trans 'Forgot password?' %}</a>
         </form>
@@ -73,7 +73,7 @@
                            name="next"
                            value="{% url lfs_checkout %}" />
 
-                    <button class="button register-button emphasized left"
+                    <button class="btn"
                             type="submit"
                             href="{% url lfs_checkout %}">{% trans "Register" %}</button>
             </form>
@@ -91,7 +91,7 @@
 
             <div class="form-wrapper">&nbsp;</div>
 
-            <a class="button checkout-button emphasized left"
+            <a class="btn"
                href="{% url lfs_checkout %}">
                {% trans 'Checkout' %}
             </a>

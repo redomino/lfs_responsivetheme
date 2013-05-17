@@ -230,14 +230,20 @@
             {% endif %}
 
             {# Cart #}
-            <div id="cart-inline">
+            <div id="cart-inline row-fluid">
                 {{ cart_inline }}
             </div>
 
             {# Message #}
-            <div id="checkout-message">
-                {% lfs_form checkout_form.message %}
+            <div class="control-group">
+                <div class="control-label">
+                {{form.message.label_tag}}
+                </div>
+                <div class="controls">
+                {{ form.message }}
+                </div>
             </div>
+
 
             {% if SHOP.confirm_toc %}
                 {% if checkout_form.errors.confirm_toc %}
@@ -251,11 +257,11 @@
             {% endif %}
 
             <div class="right">
-                <button class="button emphasized"
+                <button class="btn"
                         type="submit">
                     {% trans 'Submit order' %}
                 </button>
-                <a class="button"
+                <a class="btn"
                    href="{% url lfs.cart.views.cart %}">{% trans 'Go to cart' %}</a>
             </div>
 

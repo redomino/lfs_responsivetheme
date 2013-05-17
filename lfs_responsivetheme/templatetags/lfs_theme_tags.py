@@ -104,7 +104,7 @@ def menu_top_level_categories(context):
     categories = []
     top_category = lfs.catalog.utils.get_current_top_category(request, obj)
 
-    for category in Category.objects.filter(parent=None):
+    for category in Category.objects.filter(parent=None, exclude_from_navigation=False):
 
         if top_category:
             current = top_category.id == category.id

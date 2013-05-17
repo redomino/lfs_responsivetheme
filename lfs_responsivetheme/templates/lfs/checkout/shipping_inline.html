@@ -1,26 +1,21 @@
 {% for shipping_method in shipping_methods %}
     <div class="shipping-method container">
-        <div class="span-1">
+        {% if shipping_method.image %}
+            <div class="span1 pull-left">
+                <img class="payment-method"
+                    src="{{ shipping_method.image.url }}"
+                    alt="{{ shipping_method.name }}">
+            </div>
+        {% endif  %}
+        <label class="radio pull-left span5">
             <input type="radio"
                    name="shipping-method"
                    class="update-checkout"
                    {% ifequal shipping_method.id selected_shipping_method.id  %}checked="checked"{% endifequal %}
                    value="{{shipping_method.id}}"
                    id="shipping-method-{{shipping_method.id}}" />
-        </div>
-        <div class="span-3">
-            {% if shipping_method.image %}
-                <img class="payment-method"
-                     src="{{ shipping_method.image.url }}"
-                     alt="{{ shipping_method.name }}">
-            {% endif %}
-        </div>
-
-        <div class="span-6">
-            <label for="shipping-method-{{shipping_method.id}}">{{ shipping_method.name }}</label>
-        </div>
-        <div class="span-14 last">
+            {{ shipping_method.name }}
             {{ shipping_method.description|safe }}
-        </div>
+        </label>
     </div>
 {% endfor %}
