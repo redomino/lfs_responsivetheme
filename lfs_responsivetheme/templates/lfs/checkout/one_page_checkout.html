@@ -31,9 +31,15 @@
                             {% trans 'Invoice address' %}
                         </th>
                         <th>
-                            {% trans 'Shipping address' %}
-                            ({{ checkout_form.no_shipping }}
-                             {{ checkout_form.no_shipping.label_tag }})
+                            <div class="pull-left">{% trans 'Shipping address' %}&nbsp;&nbsp;</div>
+                            <div class="pull-left">(</div>
+                            <div class="pull-left">
+                                <label class="checkbox">
+                                    {{ form.no_shipping }}
+                                    {{ form.no_shipping.label_tag }}
+                                </label>
+                            </div>
+                            <div class="pull-left">)</div>
                         </th>
                     </tr>
                 </thead>

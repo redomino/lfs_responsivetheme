@@ -11,7 +11,12 @@
 {% endblock %}
 
 {% block wrapper %}
-    <h1>{% blocktrans count counter=cart_items_count %}This product has been added to cart{% plural %}These products have been added to cart{% endblocktrans %}</h1>
+    {% if plural %}
+        <h1>{% trans 'This products have been added to cart' %}</h1>
+    {% else %}
+        <h1>{% trans 'This product has been added to cart' %}</h1>
+    {% endif %}
+
 
     <div id="cart-items">
         {{ cart_items }}
