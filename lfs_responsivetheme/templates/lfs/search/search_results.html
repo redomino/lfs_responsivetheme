@@ -49,21 +49,21 @@
 
         <table class="lfs-default padding-top table">
             <tr>
-                <th>{% trans 'Image' %}</th>
-                <th>{% trans 'Product' %}</th>
+                <th class="image-column span2">{% trans 'Image' %}</th>
+                <th class="detail-column">{% trans 'Product' %}</th>
                 <th class="number">{% trans 'Price' %}</th>
             <tr>
             {% for product in products %}
                 <tr>
                     <td>
-                        <a href="{{ product.get_absolute_url }}" class="preview-100-100">
-                            <img src="{{ product.get_image.image.url_100x100 }}"
+                        <a href="{{ product.get_base_product.get_absolute_url }}" class="preview-100-100">
+                            <img src="{{ product.get_default_variant.get_image.image.url_100x100 }}"
                                  alt="{{ product.get_name }}"
                                  title="{{ product.get_name }}" />
                         </a>
                     </td>
                     <td>
-                        <a href="{{ product.get_absolute_url }}">
+                        <a href="{{ product.get_base_product.get_absolute_url }}">
                             {{ product.get_name }}
                         </a>
                         {% for property in product.get_variant_properties %}
@@ -83,19 +83,16 @@
                         <div class="product-price">
                             {% if product.for_sale %}
                                <span class="for-sale-standard-price">{{ product.get_standard_price|currency:request }}</span>
-                               <span class="for-sale-price">{{ product|get_for_sale_price:request|currency:request }}*</span>
+                               <span class="for-sale-price">{{ product|get_for_sale_price:request|currency:request }}</span>
                             {% else %}
-                            <span class="standard-price">{{ product|get_price:request|currency:request }}*</span>
+                            <span class="standard-price">{{ product|get_price:request|currency:request }}</span>
                             {% endif %}
                             {% if product.get_price_unit %}/ {{ product.get_price_unit }}{% endif %}
                             {% if product.active_base_price %}
                                 <div class="base-price">
-                                    {{ product|get_base_price_gross:request|currency:request}}* {% if product.get_base_price_unit %}/ {{ product.get_base_price_unit }}{% endif %}
+                                    {{ product|get_base_price_gross:request|currency:request}} {% if product.get_base_price_unit %}/ {{ product.get_base_price_unit }}{% endif %}
                                 </div>
                             {% endif %}
-                            <div class="price-disclaimer">
-                                {% trans '*inc. VAT' %}
-                            </div>
                         </div>
                     </td>
 <!--
@@ -110,6 +107,5 @@
                 </tr>
             {% endfor %}
         </table>
-        {% paginate %}
     {% endif %}
 {% endblock %}
