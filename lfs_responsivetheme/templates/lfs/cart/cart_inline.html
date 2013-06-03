@@ -26,156 +26,130 @@
           action="{% url lfs.cart.views.refresh_cart %}"
           onsubmit="return false;">
 
-        <table class="lfs-default table">
-            <tr>
-                <th colspan="2">
-                    {% trans 'Product' %}
-                </th>
-                <th class="left"
-                    colspan="2">
-                    {% trans 'Amount' %}
-                </th>
-                <th class="number visible-desktop">
-                    {% trans 'Net Price' %}
-                </th>
-                <th class="number visible-desktop">
-                    {% trans 'VAT' %}
-                </th>
-                <th class="number">
-                    {% trans 'Total' %}
-                </th>
-                <th></th>
-            </tr>
-            {% for cart_item in cart_items %}
-                <tr>
-                    <td class="image">
-                        {% if cart_item.product.get_image.image %}
-                            <a href="{{ cart_item.product.get_absolute_url }}" class="visible-desktop">
-                                <img src="{{ cart_item.product.get_image.image.url_60x60 }}"
-                                     alt="{{ cart_item.product.get_name }}"/>
+<!--
+        <div class="row-fluid">
+            <div class="span4">
+                {% trans 'Product' %}
+            </div>
+            <div class="span2">
+                {% trans 'Net Price' %}
+            </div>
+            <div class="span2">
+                {% trans 'Quantity' %}
+            </div>
+            <div class="span2">
+                {% trans 'Total' %}
+            </div>
+            <div class="span2">
+                {% trans 'Delete item' %}
+            </div>
+        </div>
+ -->
+        {% for cart_item in cart_items %}
+
+        <div class="row-fluid product-row">
+                <div class="pull-left image-slot span2">
+                {% if cart_item.product.get_image.image %}
+                    <a href="{{ cart_item.product.get_base_product.get_absolute_url }}">
+                        <img src="{{ cart_item.product.get_image.image.url_100x100 }}"
+                             alt="{{ cart_item.product.get_name }}"/>
+                    </a>
+                {% endif %}
+                </div>
+                <div class="span8">
+                <div class="row-fluid">
+                    <div class="span12 product-details">
+                        <h2 class="product-title">
+                            <a href="{{ cart_item.product.get_base_product.get_absolute_url }}">
+                                 {{ cart_item.product.get_name }}
                             </a>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <span class="product-title">
-                            <a href="{{ cart_item.product.get_absolute_url }}">
-                                {{ cart_item.product.get_name }}
-                            </a>
-                        </span>
-                        {% for property in cart_item.product.get_variant_properties %}
-                            <div>
-                                {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+                        </h2>
+                        <div class="row-fluid">
+                            <div class="span2">
+                                {% for property in cart_item.product.get_variant_properties %}
+                                    <div>
+                                        {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+                                    </div>
+                                {% endfor %}
+                                {% for property in cart_item.product.get_displayed_properties %}
+                                    <div>
+                                        {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+                                    </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-
-                        {% for property in cart_item.product.get_displayed_properties %}
-                            <div>
-                                {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+                            <div class="span10">
+				<table class="table">
+				    <thead>
+					<tr>
+                                          <th>{% trans 'Size' %}</th>
+					  <th>{% trans 'Quantity' %}</th>
+					  <th>{% trans 'Price' %}</th>
+					  <th>{% trans 'VAT' %}</th>
+					  <th>{% trans 'Net Price' %}</th>
+                                          <th>{% trans 'Total' %}</th>
+					</tr>
+				    </thead>
+				    <tbody>
+					<tr>
+					  <td class="size">
+						{% if cart_item.product.is_configurable_product %}
+						    {% for property in cart_item.obj.get_properties %}
+							<div>
+							    {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+							    {% if property.obj.is_select_field and property.display_price %}
+								 ({{ property.price|currency:request }})
+							    {% endif %}
+							</div>
+						    {% endfor %}
+						{% endif %}
+						<select class="cart-size" name="size-variant_{{ cart_item.obj.id }}">
+						    {% for variant in cart_item.product.get_same_color_active_variants %}
+							<option value="{{ variant.id }}" {% if variant.selected %}selected="selected"{% endif %}>
+							    {{ variant.value }}
+							</option>
+						    {% endfor %}
+						</select>
+                                          </td>
+                                          <td class="quantity">
+                                              <select class="cart-amount" name="amount-cart-item_{{ cart_item.obj.id }}">
+                                                  {% for count in cart_item.product.get_amount_range %}
+                                                      <option value="{{ count }}" {% ifequal count cart_item.quantity  %}selected="selected"{% endifequal %}>
+                                                          {{ count }}
+                                                      </option>
+                                                   {% endfor %}
+                                              </select>
+                                          </td>
+					  <td class="price-unit">
+                                              {{ cart_item.product.price|currency:request }}
+                                          </td>
+					  <td class="vat">
+                                              {{ cart_item.product_tax|currency:request }}
+                                          </td>
+					  <td class="net-price">
+                                              {{ cart_item.product_price_net|currency:request }}
+                                          </td>
+                                          <td class="total">
+                                              {{ cart_item.product_price_gross|currency:request }}
+                                          </td>
+					</tr>
+				    </tbody>
+				</table>
                             </div>
-                        {% endfor %}
-
-                        {% if cart_item.product.is_configurable_product %}
-                            {% for property in cart_item.obj.get_properties %}
-                                <div>
-                                    {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
-                                    {% if property.obj.is_select_field and property.display_price %}
-                                        ({{ property.price|currency:request }})
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-
-                    </td>
-                    <td class="number">
-                        <input class="number cart-amount input-mir"
-                               type="text"
-                               name="amount-cart-item_{{ cart_item.obj.id }}"
-                               size="6"
-                               value="{{ cart_item.quantity }}" />
-                    </td>
-                    <td >
-                        {% if cart_item.product.get_unit %}
-                            <span class="product-unit">
-                                {{ cart_item.product.get_unit }}
-                            </span>
-                        {% endif %}
-                        {% if cart_item.product.get_active_packing_unit %}
-                            <span class="packing-unit">
-                                ({{ cart_item.obj|packages }} {{ cart_item.product.get_packing_info.1 }})
-                            </span>
-                        {% endif %}
-                    </td>
-                    <td class="number visible-desktop"
-                        nowrap="nowrap">
-                        {{ cart_item.product_price_net|currency:request }}
-                    </td>
-                    <td class="number visible-desktop"
-                        nowrap="nowrap">
-                        {{ cart_item.product_tax|currency:request }}
-                    </td>
-                    <td class="number"
-                        nowrap="nowrap">
-                        {{ cart_item.product_price_gross|currency:request }}
-                    </td>
-                    <td class="right">
-                        <a href="{% url lfs_delete_cart_item cart_item.obj.id %}"
-                           title="{% trans 'Delete item' %}"
-                           class="delete-button delete-cart-item">X</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            {% for discount in discounts %}
-                <tr id="discounts-display">
-                    <td></td>
-                    <td class="left">
-                        {{ discount.name }}
-                    </td>
-                    <td class="number">
-                        1
-                    </td>
-                    <td class="number">
-
-                    </td>
-                    <td class="number">
-                        - {{ discount.price_net|currency:request }}
-                    </td>
-                    <td class="number">
-                        - {{ discount.get_tax|currency:request }}
-                    </td>
-                    <td class="number">
-                        - {{ discount.price_gross|currency:request }}
-                    </td>
-                    <td></td>
-                </tr>
-            {% endfor %}
-
-            {% if display_voucher %}
-                <tr id="voucher-display">
-                    <td></td>
-                    <td class="product-title left">
-                        {% trans "Voucher" %}
-                    </td>
-                    <td class="number">
-                        1
-                    </td>
-                    <td></td>
-                    <td class="number">
-                        - {{ voucher_value|currency:request }}
-                    </td>
-                    <td class="number">
-                        ({{ voucher_tax|currency:request }})
-                    </td>
-                    <td class="number">
-                        - {{ voucher_value|currency:request }}
-                    </td>
-                    <td></td>
-                </tr>
-            {% endif %}
-
+                        </div>
+                    </div>
+                </div>    
+            </div>
+                <div class="span2 delete-button">
+                    <a href="{% url lfs_delete_cart_item cart_item.obj.id %}"
+                       title="{% trans 'Delete item' %}"
+                       class="delete-button delete-cart-item">
+                       <i class="icon-trash icon-white"></i> {% trans 'Delete item' %}
+                    </a>
+                </div>
+        </div>
+        {% endfor %}
+        <table class="table">
             <tr>
-                <td></td>
-                <td class="visible-desktop"></td>
-                <td class="visible-desktop"></td>
                 <td class="left">
                     {% trans 'Country' %}:
                 </td>
@@ -190,13 +164,8 @@
                         {% endfor %}
                     </select>
                 </td>
-                <td colspan="2"></td>
-                <td></td>
             </tr>
             <tr>
-                <td></td>
-                <td class="visible-desktop"></td>
-                <td class="visible-desktop"></td>
                 <td class="left">
                     {% trans 'Shipping' %}:
                 </td>
@@ -211,18 +180,13 @@
                         {% endfor %}
                     </select>
                 </td>
-                <td></td>
                 <td class="number"
                     nowrap="nowrap">
                     {{ shipping_price|currency:request }}
                 </td>
-                <td></td>
             </tr>
 
             <tr>
-                <td></td>
-                <td class="visible-desktop"></td>
-                <td class="visible-desktop"></td>
                 <td class="left">
                     {% trans 'Payment' %}:
                 </td>
@@ -237,48 +201,34 @@
                         {% endfor %}
                     </select>
                 </td>
-                <td></td>
                 <td class="number"
                     nowrap="nowrap">
                     {{ payment_price|currency:request }}
                 </td>
-                <td></td>
             </tr>
 
             <tr>
-                <td></td>
-                <td class="visible-desktop"></td>
-                <td class="visible-desktop"></td>
-                <td colspan="3"
-                    class="total left padding-top">
+                <td class="total left padding-top">
                     {% trans 'Total' %}:
                 </td>
                 <td class="total number padding-top"
                     nowrap="nowrap">
                     {{ cart_price|currency:request }}
                 </td>
-                <td></td>
+                <td class="hidden-phone"></td>
             </tr>
             <tr>
-                <td></td>
-                <td class="visible-desktop"></td>
-                <td class="visible-desktop"></td>
-                <td colspan="3"
-                    class="discreet left">
+                <td class="discreet left">
                     {% trans 'Inclusive VAT' %}:
                 </td>
                 <td class="discreet number"
                     nowrap="nowrap">
                     {{ cart_tax|currency:request }}
                 </td>
-                <td></td>
+                <td class="hidden-phone"></td>
             </tr>
             <tr>
-                <td></td>
-                <td class="visible-desktop"></td>
-                <td class="visible-desktop"></td>
-                <td colspan="5"
-                    class="discreet left padding-top">
+                <td class="discreet left padding-top">
                     {% trans 'Total delivery time' %}: {{ max_delivery_time }}
                 </td>
             </tr>

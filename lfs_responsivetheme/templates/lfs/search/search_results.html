@@ -15,16 +15,15 @@
 
     <h1 class="first-heading">{% trans 'Search results' %}</h1>
 
-    <form action="{% url lfs_search %}"
-          class="search-results-form form-inline">
+    <form action="{% url lfs_search %}" id="search-form-page"
+          class="form-inline search-form">
 
-        <label class="control-label" for="search">{% trans 'Search' %}:</label>
-        <input id="search-results-input input-large"
+        <input class="search-field input"
                type="text"
                value="{{ q }}"
                name="q" />
 
-        <input type="submit" class="btn"
+        <input type="submit" class="btn search-button"
                value="{% trans 'Go!' %}">
     </form>
 

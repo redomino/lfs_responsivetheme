@@ -3,16 +3,20 @@
 <table class="lfs-default table">
     <thead>
         <tr>
-            <th colspan="2">
+            <th colspan="2" class="hidden-phone">
                 {% trans 'Product' %}
             </th>
+            <th class="visible-phone">
+                {% trans 'Product' %}
+            </th>
+
             <th class="number">
                 {% trans 'Quantity' %}
             </th>
             <th class="number">
-                {% trans 'Net Price' %}
+                {% trans 'Price' %}
             </th>
-            <th class="number">
+            <th class="number hidden-phone">
                 {% trans 'VAT' %}
             </th>
             <th class="number last">
@@ -23,7 +27,7 @@
     <tbody>
         {% for cart_item in cart_items %}
             <tr>
-                <td class="image">
+                <td class="image hidden-phone">
                     <img src="{{ cart_item.product.get_image.image.url_60x60 }}"
                          alt="{{ cart_item.product.get_name }}"/>
                 </td>
@@ -65,7 +69,7 @@
                 <td class="number">
                     {{ cart_item.product_price_net|currency:request}}
                 </td>
-                <td class="number">
+                <td class="number hidden-phone">
                     {{ cart_item.product_tax|currency:request}}
                 </td>
                 <td class="number last">
