@@ -785,7 +785,6 @@ msgid "Dear %(firstname)s %(lastname)s"
 msgstr "Ciao %(firstname)s %(lastname)s"
 
 #: templates/lfs/mail/order_paid_mail.html:11
-#, fuzzy
 msgid "Your order has been paid."
 msgstr "Il tuo ordine è stato pagato"
 

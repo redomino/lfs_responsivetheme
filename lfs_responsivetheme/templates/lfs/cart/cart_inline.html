@@ -26,25 +26,6 @@
           action="{% url lfs.cart.views.refresh_cart %}"
           onsubmit="return false;">
 
-<!--
-        <div class="row-fluid">
-            <div class="span4">
-                {% trans 'Product' %}
-            </div>
-            <div class="span2">
-                {% trans 'Net Price' %}
-            </div>
-            <div class="span2">
-                {% trans 'Quantity' %}
-            </div>
-            <div class="span2">
-                {% trans 'Total' %}
-            </div>
-            <div class="span2">
-                {% trans 'Delete item' %}
-            </div>
-        </div>
- -->
         {% for cart_item in cart_items %}
 
         <div class="row-fluid product-row">
@@ -56,7 +37,7 @@
                     </a>
                 {% endif %}
                 </div>
-                <div class="span8">
+                <div class="span10">
                 <div class="row-fluid">
                     <div class="span12 product-details">
                         <h2 class="product-title">
@@ -66,26 +47,31 @@
                         </h2>
                         <div class="row-fluid">
                             <div class="span2">
-                                {% for property in cart_item.product.get_variant_properties %}
-                                    <div>
-                                        {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
-                                    </div>
+                                <table class="table">
+                                    {% for property in cart_item.product.get_variant_properties %}
+                                    <tr>
+                                        <th>{{ property.title }}:</th><td> {{ property.value }} {{ property.unit|safe }}</td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    {% for property in cart_item.product.get_displayed_properties %}
+                                     <tr>
+                                        <th>{{ property.title }}:</th><td> {{ property.value }} {{ property.unit|safe }}</td>
+                                    </tr>
                                 {% endfor %}
-                                {% for property in cart_item.product.get_displayed_properties %}
-                                    <div>
-                                        {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
-                                    </div>
-                                {% endfor %}
+                                </table>
                             </div>
-                            <div class="span10">
+                            <div class="span6 offset4">
 				<table class="table">
 				    <thead>
 					<tr>
                                           <th>{% trans 'Size' %}</th>
 					  <th>{% trans 'Quantity' %}</th>
 					  <th>{% trans 'Price' %}</th>
-					  <th>{% trans 'VAT' %}</th>
-					  <th>{% trans 'Net Price' %}</th>
+<!--
+					  <th class="hidden-phone">{% trans 'VAT' %}</th>
+					  <th class="hidden-phone">{% trans 'Net Price' %}</th>
+-->
                                           <th>{% trans 'Total' %}</th>
 					</tr>
 				    </thead>
@@ -122,14 +108,24 @@
 					  <td class="price-unit">
                                               {{ cart_item.product.price|currency:request }}
                                           </td>
-					  <td class="vat">
+<!--
+					  <td class="vat hidden-phone">
                                               {{ cart_item.product_tax|currency:request }}
                                           </td>
-					  <td class="net-price">
+					  <td class="net-price hidden-phone">
                                               {{ cart_item.product_price_net|currency:request }}
                                           </td>
+-->
                                           <td class="total">
                                               {{ cart_item.product_price_gross|currency:request }}
+                                          </td>
+                                          <td>
+                    <a href="{% url lfs_delete_cart_item cart_item.obj.id %}"
+                       title="{% trans 'Delete item' %}"
+                       class="delete-button delete-cart-item">
+                       <i class="icon-trash icon-white"></i>
+                    </a>
+
                                           </td>
 					</tr>
 				    </tbody>
@@ -139,21 +135,15 @@
                     </div>
                 </div>    
             </div>
-                <div class="span2 delete-button">
-                    <a href="{% url lfs_delete_cart_item cart_item.obj.id %}"
-                       title="{% trans 'Delete item' %}"
-                       class="delete-button delete-cart-item">
-                       <i class="icon-trash icon-white"></i> {% trans 'Delete item' %}
-                    </a>
-                </div>
         </div>
         {% endfor %}
+
         <table class="table">
             <tr>
-                <td class="left">
+                <td class="span6">
                     {% trans 'Country' %}:
                 </td>
-                <td>
+                <td class="span3">
                     <select class="cart-country"
                             name="country">
                         {% for country in countries %}
@@ -164,12 +154,14 @@
                         {% endfor %}
                     </select>
                 </td>
+                <td class="span3">
+                </td>
             </tr>
             <tr>
-                <td class="left">
+                <td class="span6">
                     {% trans 'Shipping' %}:
                 </td>
-                <td>
+                <td class="span3">
                     <select class="cart-shipping-method"
                             name="shipping_method">
                         {% for shipping_method in shipping_methods %}
@@ -180,17 +172,15 @@
                         {% endfor %}
                     </select>
                 </td>
-                <td class="number"
-                    nowrap="nowrap">
+                <td class="span3">
                     {{ shipping_price|currency:request }}
                 </td>
             </tr>
-
             <tr>
-                <td class="left">
+                <td class="span6">
                     {% trans 'Payment' %}:
                 </td>
-                <td>
+                <td class="span3">
                     <select class="cart-payment-method"
                             name="payment_method">
                         {% for payment_method in payment_methods %}
@@ -201,52 +191,47 @@
                         {% endfor %}
                     </select>
                 </td>
-                <td class="number"
-                    nowrap="nowrap">
+                <td class="span3">
                     {{ payment_price|currency:request }}
                 </td>
             </tr>
-
             <tr>
-                <td class="total left padding-top">
+                <td class="span6">
                     {% trans 'Total' %}:
                 </td>
-                <td class="total number padding-top"
-                    nowrap="nowrap">
+                <td class="span3">
+                </td>
+                <td class="span3">
                     {{ cart_price|currency:request }}
                 </td>
-                <td class="hidden-phone"></td>
             </tr>
             <tr>
-                <td class="discreet left">
+                <td class="span6">
                     {% trans 'Inclusive VAT' %}:
                 </td>
-                <td class="discreet number"
-                    nowrap="nowrap">
+                <td class="span3">
+                </td>
+                <td class="span3">
                     {{ cart_tax|currency:request }}
                 </td>
-                <td class="hidden-phone"></td>
             </tr>
             <tr>
-                <td class="discreet left padding-top">
+                <td class="span12" colspan="3">
                     {% trans 'Total delivery time' %}: {{ max_delivery_time }}
                 </td>
             </tr>
-            <tr>
-                <td colspan="8">
-                    <div class="buttons">
-                        <a class="btn"
-                           href="{% url lfs_checkout_dispatcher %}">
-                           {% trans 'Checkout' %}
-                        </a>
-                        <a class="btn"
-                           href="{{ shopping_url }}">
-                            {% trans 'Go on shopping' %}
-                        </a>
-                    </div>
-                </td>
-            </tr>
+
         </table>
+
+        <a class="btn"
+           href="{% url lfs_checkout_dispatcher %}">
+           {% trans 'Checkout' %}
+        </a>
+        <a class="btn"
+           href="{{ shopping_url }}">
+           {% trans 'Go on shopping' %}
+        </a>
+
     </form>
 {% else %}
     <h1 class="title">
