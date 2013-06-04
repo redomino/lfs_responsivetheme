@@ -22,7 +22,7 @@
 #swipebox-slider {
   height: 100%;
   left: 0;
-  top: 0;
+  top: 40px;
   width: 100%;
   white-space: nowrap;
   position: absolute;
@@ -61,31 +61,32 @@
   position: absolute;
   left: 0;
   z-index: 999;
-  height: 50px;
+  height: 40px;
   width: 100%;
 }
 
 #swipebox-action {
-  bottom: -50px;
+  /*bottom: -50px;*/
 }
 #swipebox-action.visible-bars {
-  bottom: 0;
+/*  bottom: 0;*/
+    top: 0;
 }
 
 #swipebox-action.force-visible-bars {
-  bottom: 0!important;
+/*  bottom: 0!important;*/
 }
 
 #swipebox-caption {
-  top: -50px;
+  /*top: -50px;*/
   text-align: center;
 }
 #swipebox-caption.visible-bars {
-  top: 0;
+  /*top: 0;*/
 }
 
 #swipebox-caption.force-visible-bars {
-  top: 0!important;
+  /*top: 0!important;*/
 }
 
 #swipebox-action #swipebox-prev, #swipebox-action #swipebox-next,
@@ -196,6 +197,7 @@
 
 #swipebox-action, #swipebox-caption {
   text-shadow: 1px 1px 1px black;
+/*
   background-color: #0d0d0d;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(100%, #000000));
   background-image: -webkit-linear-gradient(#0d0d0d, #000000);
@@ -206,13 +208,15 @@
   -moz-box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
   box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
-  opacity: 0.95;
+  opacity: 0.95;*/
+  filter: none;
+  background: transparent;
 }
 
-#swipebox-action {
+#swipebox-action {/*
   -webkit-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
   -moz-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
-  box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
+  box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;*/
 }
 
 #swipebox-caption {

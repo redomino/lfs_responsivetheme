@@ -24,14 +24,23 @@
 			$selector = $(selector),
 			isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
 			supportSVG = !!(window.SVGSVGElement),
+                        //html = '<div id="swipebox-overlay">\
+                        //                <div id="swipebox-slider"></div>\
+                        //                <div id="swipebox-caption"></div>\
+                        //                <div id="swipebox-action">\
+                        //                        <a id="swipebox-close"></a>\
+                        //                        <a id="swipebox-prev"></a>\
+                        //                        <a id="swipebox-next"></a>\
+                        //                </div>\
+                        //</div>'
 			html = '<div id="swipebox-overlay">\
-					<div id="swipebox-slider"></div>\
-					<div id="swipebox-caption"></div>\
+                                        <div id="swipebox-caption"></div>\
 					<div id="swipebox-action">\
 						<a id="swipebox-close"></a>\
 						<a id="swipebox-prev"></a>\
 						<a id="swipebox-next"></a>\
 					</div>\
+                                        <div id="swipebox-slider"></div>\
 			</div>';
 
 		plugin.settings = {}
