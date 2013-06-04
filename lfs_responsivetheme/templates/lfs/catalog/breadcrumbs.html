@@ -1,14 +1,11 @@
 {% load i18n %}
 <ul class="breadcrumb">
-<!--
-    <li class="breadcrumbs-label">{% trans 'You are here:' %}</li>
--->
     <li class="pull-left visible-desktop" >
         <a href="{% url lfs_shop_view %}">
             {% trans 'Home' %}</a>
     </li>
     <li class="pull-left hidden-desktop" >
-        <a href="{% url lfs_shop_view %}"><span class="icon-home" /></a>
+        <a href="{% url lfs_shop_view %}"><i class="icon-home" ></i></a>
     </li>
 
     {% for object in objects %}

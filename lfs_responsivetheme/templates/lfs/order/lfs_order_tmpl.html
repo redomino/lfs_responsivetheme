@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load lfs_tags %}
-<table class="order lfs-default">
+<table class="order table">
     <thead>
         <tr>
             <th colspan="4">
@@ -10,13 +10,13 @@
     </thead>
     <tbody>
         <tr>
-            <td class="label" width="25%">
+            <td class="" width="25%">
                 {% trans 'Customer name' %}:
             </td>
             <td width="25%">
                 {{ current_order.customer_firstname }} {{ current_order.customer_lastname }}
             </td>
-            <td class="label" width="25%">
+            <td class="" width="25%">
                 {% trans 'Date' %}:
             </td>
             <td width="25%">
@@ -24,7 +24,7 @@
             </td>
         </tr>
         <tr>
-            <td class="label">
+            <td class="">
                 {% trans 'E-mail' %}:
             </td>
             <td>
@@ -32,7 +32,7 @@
                     {{ current_order.customer_email }}
                 </a>
             </td>
-            <td class="label">
+            <td class="">
                 {% trans 'State' %}:
             </td>
             <td>
@@ -40,13 +40,13 @@
             </td>
         </tr>
         <tr>
-            <td class="label">
+            <td class="">
                 {% trans 'Phone' %}:
             </td>
             <td>
                 {{ current_order.shipping_phone }}
             </td>
-            <td class="label">
+            <td class="">
                 {% trans 'Total' %}:
             </td>
             <td>
@@ -56,7 +56,7 @@
     </tbody>
 </table>
 
-<table class="order lfs-default padding-top-middle">
+<table class="order table">
     <thead>
         <tr>
             <th width="25%">
@@ -109,7 +109,7 @@
     </tbody>
 </table>
 
-<table class="order lfs-default padding-top-middle">
+<table class="order table">
     <thead>
         <tr>
             <th width="13%">
@@ -236,7 +236,7 @@
     </tfoot>
 </table>
 {% if current_order.message %}
-    <table class="order lfs-default padding-top-middle">
+    <table class="order table">
         <tr>
             <th>
                 {% trans 'Message from the customer' %}

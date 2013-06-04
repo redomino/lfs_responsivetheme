@@ -30,6 +30,10 @@ label {
     display: inline;
 }
 
+th.shipping_checkbox label {
+    display: block;
+}
+
 select {
     width: auto;
 }
