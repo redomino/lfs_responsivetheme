@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LFS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-03 12:04+0200\n"
+"POT-Creation-Date: 2013-06-04 11:15+0200\n"
 "PO-Revision-Date: 2011-12-13 11:35+0000\n"
 "Last-Translator: Fabrizio Reale <fabrizio.reale@redomino.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,23 +32,23 @@ msgstr "Impossibile trovare la pagina richiesta"
 msgid "An error has occured. Please try again in a minute."
 msgstr "Si è verificato un errore. Si prega di riprovare fra qualche minuto."
 
-#: templates/lfs/base.html:190
+#: templates/lfs/base.html:192
 msgid "Powered by"
 msgstr "Fornito da"
 
-#: templates/lfs/base.html:192
+#: templates/lfs/base.html:194
 msgid "by"
 msgstr "da"
 
-#: templates/lfs/base.html:192
+#: templates/lfs/base.html:194
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
-#: templates/lfs/base.html:194
+#: templates/lfs/base.html:196
 msgid "Distributed under the"
 msgstr "Distribuito sotto"
 
-#: templates/lfs/base.html:194
+#: templates/lfs/base.html:196
 msgid "BSD-License"
 msgstr "licenza BSD"
 
@@ -106,8 +106,7 @@ msgstr "Nome"
 
 #: templates/lfs/cart/added_to_cart.html:34
 #: templates/lfs/cart/added_to_cart_items.html:14
-#: templates/lfs/cart/cart_inline.html:38
-#: templates/lfs/cart/cart_inline.html:85
+#: templates/lfs/cart/cart_inline.html:69
 #: templates/lfs/catalog/products/product_inline.html:165
 #: templates/lfs/catalog/products/product_inline.html:304
 #: templates/lfs/checkout/checkout_cart_inline.html:31
@@ -116,7 +115,7 @@ msgstr "Quantità"
 
 #: templates/lfs/cart/added_to_cart.html:37
 #: templates/lfs/cart/added_to_cart_items.html:17
-#: templates/lfs/cart/cart_inline.html:86
+#: templates/lfs/cart/cart_inline.html:70
 #: templates/lfs/catalog/products/product_inline.html:218
 #: templates/lfs/catalog/products/product_inline.html:305
 #: templates/lfs/customer/orders.html:48
@@ -131,9 +130,8 @@ msgstr "Prezzo"
 #: templates/lfs/cart/added_to_cart.html:40
 #: templates/lfs/cart/added_to_cart_items.html:23
 #: templates/lfs/cart/added_to_cart_items.html:85
-#: templates/lfs/cart/cart_inline.html:41
-#: templates/lfs/cart/cart_inline.html:89
-#: templates/lfs/cart/cart_inline.html:212
+#: templates/lfs/cart/cart_inline.html:75
+#: templates/lfs/cart/cart_inline.html:200
 #: templates/lfs/catalog/products/product_inline.html:306
 #: templates/lfs/checkout/checkout_cart_inline.html:40
 #: templates/lfs/checkout/checkout_cart_inline.html:188
@@ -149,7 +147,7 @@ msgid "Add"
 msgstr "Aggiungi"
 
 #: templates/lfs/cart/added_to_cart.html:78
-#: templates/lfs/cart/cart_inline.html:240
+#: templates/lfs/cart/cart_inline.html:228
 #: templates/lfs/checkout/empty_page_checkout.html:6
 #: templates/lfs/checkout/empty_page_checkout.html:12
 #: templates/lfs/checkout/login.html:87 templates/lfs/checkout/login.html:97
@@ -165,8 +163,8 @@ msgid "Go to cart"
 msgstr "Vai al carrello"
 
 #: templates/lfs/cart/added_to_cart.html:86
-#: templates/lfs/cart/cart_inline.html:244
-#: templates/lfs/cart/cart_inline.html:257
+#: templates/lfs/cart/cart_inline.html:232
+#: templates/lfs/cart/cart_inline.html:242
 #: templates/lfs/checkout/empty_page_checkout.html:21
 #: templates/lfs/contact/contact_form_sent.html:20
 msgid "Go on shopping"
@@ -174,7 +172,6 @@ msgstr "Vai al negozio"
 
 #: templates/lfs/cart/added_to_cart_items.html:7
 #: templates/lfs/cart/added_to_cart_items.html:10
-#: templates/lfs/cart/cart_inline.html:32
 #: templates/lfs/checkout/checkout_cart_inline.html:27
 #: templates/lfs/mail/review_added_mail.html:7
 #: templates/lfs/search/search_results.html:52
@@ -183,7 +180,7 @@ msgid "Product"
 msgstr "Prodotto"
 
 #: templates/lfs/cart/added_to_cart_items.html:20
-#: templates/lfs/cart/cart_inline.html:87
+#: templates/lfs/cart/cart_inline.html:72
 #: templates/lfs/checkout/checkout_cart_inline.html:37
 msgid "VAT"
 msgstr "IVA"
@@ -207,27 +204,24 @@ msgstr ""
 msgid "Your Cart"
 msgstr "Il tuo carrello"
 
-#: templates/lfs/cart/cart_inline.html:35
-#: templates/lfs/cart/cart_inline.html:88
+#: templates/lfs/cart/cart_inline.html:68
+msgid "Size"
+msgstr "Taglia"
+
+#: templates/lfs/cart/cart_inline.html:73
 #: templates/lfs/checkout/checkout_cart_inline.html:34
 msgid "Net Price"
 msgstr "Prezzo netto"
 
-#: templates/lfs/cart/cart_inline.html:44
-#: templates/lfs/cart/cart_inline.html:144
-#: templates/lfs/cart/cart_inline.html:146
+#: templates/lfs/cart/cart_inline.html:124
 msgid "Delete item"
 msgstr "Rimuovi articolo"
 
-#: templates/lfs/cart/cart_inline.html:84
-msgid "Size"
-msgstr ""
-
-#: templates/lfs/cart/cart_inline.html:154
+#: templates/lfs/cart/cart_inline.html:144
 msgid "Country"
 msgstr "Paese"
 
-#: templates/lfs/cart/cart_inline.html:170
+#: templates/lfs/cart/cart_inline.html:162
 #: templates/lfs/checkout/checkout_cart_inline.html:151
 #: templates/lfs/checkout/one_page_checkout.html:65
 #: templates/lfs/mail/order_details.html:264
@@ -236,7 +230,7 @@ msgstr "Paese"
 msgid "Shipping"
 msgstr "Spedizione"
 
-#: templates/lfs/cart/cart_inline.html:191
+#: templates/lfs/cart/cart_inline.html:181
 #: templates/lfs/checkout/checkout_cart_inline.html:169
 #: templates/lfs/checkout/payment_inline.html:4
 #: templates/lfs/mail/order_details.html:279
@@ -244,28 +238,22 @@ msgstr "Spedizione"
 msgid "Payment"
 msgstr "Pagamento"
 
-#: templates/lfs/cart/cart_inline.html:222
+#: templates/lfs/cart/cart_inline.html:210
 #: templates/lfs/checkout/checkout_cart_inline.html:195
 #: templates/lfs/mail/order_details.html:300
 #: templates/lfs/order/lfs_order_tmpl.html:232
 msgid "Inclusive VAT"
 msgstr "IVA inclusa"
 
-#: templates/lfs/cart/cart_inline.html:232
+#: templates/lfs/cart/cart_inline.html:220
 msgid "Total delivery time"
 msgstr "Tempo totale di consegna"
 
-#: templates/lfs/cart/cart_inline.html:253
+#: templates/lfs/cart/cart_inline.html:238
 msgid "Your Cart is empty"
 msgstr "Il tuo carrello è vuoto"
 
-#: templates/lfs/catalog/breadcrumbs.html:4 templates/lfs/shop/shop.html:16
-#: templates/registration/password_reset_complete.html:9
-#: templates/registration/password_reset_confirm.html:9
-msgid "You are here:"
-msgstr "Sei qui:"
-
-#: templates/lfs/catalog/breadcrumbs.html:8 templates/lfs/shop/menu.html:3
+#: templates/lfs/catalog/breadcrumbs.html:5 templates/lfs/shop/menu.html:3
 #: templates/lfs/shop/shop.html:19 templates/lfs/shop/tabs.html:7
 #: templates/registration/password_reset_complete.html:12
 #: templates/registration/password_reset_confirm.html:12
@@ -719,11 +707,11 @@ msgstr "Questa e-mail è stata inviata dal portale %(name)s"
 
 #: templates/lfs/mail/new_user_mail.html:7
 msgid "Welcome to"
-msgstr "Benvenuto"
+msgstr "Benvenuto su"
 
 #: templates/lfs/mail/new_user_mail.html:9
 msgid "Thank you for registering"
-msgstr ""
+msgstr "Grazie per esserti registrato"
 
 #: templates/lfs/mail/new_user_mail.html:12
 msgid "Your username"
@@ -941,6 +929,12 @@ msgid "1 product was found."
 msgid_plural "%(counter)s products were found."
 msgstr[0] "trovato un prodotto."
 msgstr[1] "%(counter)s prodotti sono stati trovati ."
+
+#: templates/lfs/shop/shop.html:16
+#: templates/registration/password_reset_complete.html:9
+#: templates/registration/password_reset_confirm.html:9
+msgid "You are here:"
+msgstr "Sei qui:"
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_complete.html:22
