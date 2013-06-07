@@ -8,7 +8,7 @@
             {% blocktrans with firstname=order.customer_firstname lastname=order.customer_lastname %}Dear {{ firstname }} {{ lastname }}{% endblocktrans %},
         </p>
         <p>
-            {% trans "Your order has been paid." %}
+            {% trans "your order has been paid." %}
         </p>
         <p>
             {% include "lfs/mail/order_details.html" %}

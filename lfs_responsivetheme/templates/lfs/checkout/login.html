@@ -18,12 +18,12 @@
     </h1>
 
     <div class="row-fluid">
-    <div class="login span6">
+    <div class="login span4">
         <h2 class="authenticate">{% trans 'Login' %}</h2>
 
-        <div class="description">
+        <p class="description">
             {% trans 'If you are already customer you can login. Your adress data will then already known.' %}
-        </div>
+        </p>
 
         <form class="authenticate"
               action="{% url lfs_checkout_login %}"
@@ -51,12 +51,12 @@
     </div>
 
     {% if not ANON_ONLY %}
-        <div class="register span6">
+        <div class="register span4">
             <h2 class="authenticate">{% trans 'Register' %}</h2>
 
-            <div class="description">
+            <p class="description">
                 {% trans 'If you are not already a customer you can register in order to store your address data and to follow the state of your orders.' %}
-            </div>
+            </p>
 
             <form action="{% url lfs_checkout_login %}"
                   method="post">
@@ -81,9 +81,8 @@
 
         </div>
     {% endif %}
-    </div>
     {% if anonymous_checkout %}
-        <div class="anonymous-checkout">
+        <div class="anonymous-checkout span4">
             <h2 class="authenticate">{% trans 'Checkout' %}</h2>
 
             <div class="description">
@@ -98,4 +97,5 @@
             </a>
         </div>
     {% endif %}
+    </div>
 {% endblock %}

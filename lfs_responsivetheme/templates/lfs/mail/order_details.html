@@ -77,70 +77,62 @@
     </tr>
     <tr>
         <td>
-            {% with order.shipping_address as sa %}
-                <div>
-                    {{ sa.firstname }}
-                </div>
-                <div>
-                    {{ sa.lastname }}
-                </div>
-                <div>
-                    {{ sa.company_name }}
-                </div>
-                <div>
-                    {{ sa.line1 }}
-                </div>
-                {% if sa.line2 %}
-                    <div>
-                        {{ sa.line2 }}
-                    </div>
-                {% endif %}
-                <div>
-                    {{ sa.zip_code }} {{ sa.city }}
-                </div>
-                <div>
-                    {{ sa.country }}
-                </div>
-                <div>
-                    {{ sa.phone }}
-                </div>
-                <div>
-                    {{ sa.email }}
-                </div>
-            {% endwith %}
+            <div>
+                {{ order.shipping_firstname }}
+            </div>
+            <div>
+                {{ order.shipping_lastname }}
+            </div>
+            <div>
+                {{ order.shipping_company_name }}
+            </div>
+            <div>
+                {{ order.shipping_line1 }}
+            </div>
+            <div>
+                {{ order.shipping_line2 }}
+            </div>
+            <div>
+                {{ order.shipping_code }} {{ order.shipping_city }}
+            </div>
+            <div>
+                {{ order.shipping_country }}
+            </div>
+            <div>
+                {{ order.shipping_phone }}
+            </div>
+            <div>
+                {{ order.shipping_email }}
+            </div>
         </td>
         <td>
-            {% with order.invoice_address as ia %}
-                <div>
-                    {{ ia.firstname }}
-                </div>
-                <div>
-                    {{ ia.lastname }}
-                </div>
-                <div>
-                    {{ ia.company_name }}
-                </div>
-                <div>
-                    {{ ia.line1 }}
-                </div>
-                {% if ia.line2 %}
-                    <div>
-                        {{ ia.line2 }}
-                    </div>
-                {% endif %}
-                <div>
-                    {{ ia.zip_code }} {{ ia.city }}
-                </div>
-                <div>
-                    {{ ia.country }}
-                </div>
-                <div>
-                    {{ ia.phone }}
-                </div>
-                <div>
-                    {{ ia.email }}
-                </div>
-            {% endwith %}
+            <div>
+                {{ order.invoice_firstname }}
+            </div>
+            <div>
+                {{ order.invoice_lastname }}
+            </div>
+            <div>
+                {{ order.invoice_company_name }}
+            </div>
+            <div>
+                {{ order.invoice_line1 }}
+            </div>
+            <div>
+                {{ order.invoice_line2 }}
+            </div>
+            <div>
+                {{ order.invoice_code }} {{ order.invoice_city }}
+            </div>
+            <div>
+                {{ order.invoice_country }}
+            </div>
+            <div>
+                {{ order.invoice_phone }}
+            </div>
+            <div>
+                {{ order.invoice_email }}
+            </div>
         </td>
         <td>
             <div>
@@ -165,12 +157,12 @@
                     {{ order.depositor }}
                 </div>
             {% endifequal %}
-            {% if order.payment_method.id == 3 and order.can_be_paid %}
+            {% ifequal order.payment_method.id 3 %}
                 <div>
                     <a href="{{ order.get_pay_link }}"
                        class="order-pay-link">{% trans 'Pay now' %}</a>
                 </div>
-            {% endif %}
+            {% endifequal %}
         </td>
     </tr>
 

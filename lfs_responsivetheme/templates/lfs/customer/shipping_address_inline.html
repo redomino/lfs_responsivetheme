@@ -2,19 +2,19 @@
     <div class="shipping-address">
         <div class="control-group">
             <div class="control-label">
-                {{ form.shipping_firstname.label_tag }}*:
+                {{ form.shipping_firstname.label_tag }} *
             </div>
             <div class="controls">
-                {{ form.shipping_firstname.errors }}
+                {% if form.shipping_firstname.errors %}<div class="alert alert-error">{{ form.shipping_firstname.errors.as_text }}</div>{% endif %}
                 {{ form.shipping_firstname }}
             </div>
         </div>
         <div class="control-group">
             <div class="control-label">
-                {{ form.shipping_lastname.label_tag }}*:
+                {{ form.shipping_lastname.label_tag }} *
             </div>
             <div class="controls">
-                {{ form.shipping_lastname.errors }}
+                {% if form.shipping_lastname.errors %}<div class="alert alert-error">{{ form.shipping_lastname.errors.as_text }}</div>{% endif %}
                 {{ form.shipping_lastname }}
             </div>
         </div>
@@ -23,17 +23,17 @@
                 {{ form.shipping_company_name.label_tag }}{% if settings.LFS_INVOICE_COMPANY_NAME_REQUIRED %}*{% endif %}:
             </div>
             <div class="controls">
-                {{ form.shipping_company_name.errors }}
+                {% if form.shipping_name.errors %}<div class="alert alert-error">{{ form.shipping_company_name.errors.as_text }}</div>{% endif %}
                 {{ form.shipping_company_name }}
             </div>
         </div>
         {% for field in address_form %}
             <div class="control-group">
                 <div class="control-label">
-                    {{ field.label_tag }}{% if field.field.required %}*{% endif %}:
+                    {{ field.label_tag }}{% if field.field.required %} *{% endif %}
                 </div>
                 <div class="controls">
-                    {{ field.errors }}
+                    {% if field.errors %}<div class="alert alert-error">{{ field.errors.as_text }}</div>{% endif %}
                     {{ field }}
                 </div>
             </div>
@@ -41,10 +41,10 @@
         {% if request.user.is_anonymous %}
            <div class="control-group">
                 <div class="control-label">
-                    {{ form.shipping_email.label_tag }}{% if settings.LFS_SHIPPING_EMAIL_REQUIRED %}*{% endif %}:
+                    {{ form.shipping_email.label_tag }}{% if settings.LFS_SHIPPING_EMAIL_REQUIRED %} *{% endif %}
                 </div>
                 <div class="controls">
-                    {{ form.shipping_email.errors }}
+                    {% if form.shipping_email.errors %}<div class="alert alert-error">{{ form.shipping_email.errors.as_text }}</div>{% endif %}
                     {{ form.shipping_email }}
                 </div>
            </div>
@@ -55,7 +55,7 @@
                     {{ form.shipping_phone.label_tag }}{% if settings.LFS_SHIPPING_PHONE_REQUIRED %}*{% endif %}:
                 </div>
                 <div class="controls">
-                    {{ form.shipping_phone.errors }}
+                    {% if form.shipping_phone.errors %}<div class="alert alert-error">{{ form.shipping_phone.errors.as_text }}</div>{% endif %}
                     {{ form.shipping_phone }}
                 </div>
             </div>

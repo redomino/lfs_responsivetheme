@@ -13,7 +13,7 @@
 
 {% block wrapper %}
     {% if form.errors %}
-        <div class="form-errors">
+        <div class="form-errors alert alert-error">
             {% trans "The operation could not be performed because one or more errors occurred. Please see below." %}
         </div>
     {% endif %}
@@ -252,17 +252,21 @@
 
 
             {% if SHOP.confirm_toc %}
-                {% if checkout_form.errors.confirm_toc %}
-                    <ul class="errorlist">
-                        <li>{{ checkout_form.errors.confirm_toc }}</li>
-                    </ul>
+            <div class="row-fluid">
+                <div class="span6">
+                {% if form.errors.confirm_toc %}
+                <div class="alert alert-error">{{ form.errors.confirm_toc }}</div>
                 {% endif %}
 
-                <input type="checkbox" name="confirm_toc" id="confirm_toc" />
-                <label for="confirm_toc">{% trans "Please confirm our terms and conditions" %}</label>
+                <label class="checkbox inline" for="confirm_toc">
+                    <input type="checkbox" name="confirm_toc" id="confirm_toc" />
+                    <a href="/term-and-conditions" >{% trans "Accept terms and conditions" %}</a>
+                </label>
+                </div>
+            </div>
             {% endif %}
 
-            <div class="right">
+            <div class="pull-right">
                 <button class="btn"
                         type="submit">
                     {% trans 'Submit order' %}

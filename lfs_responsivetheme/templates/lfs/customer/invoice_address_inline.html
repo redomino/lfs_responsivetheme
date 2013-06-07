@@ -2,19 +2,19 @@
 	<div class="invoice-address">
 	    <div class="control-group"> 
 	        <div class="control-label">
-	            {{ form.invoice_firstname.label_tag }}*:
+	            {{ form.invoice_firstname.label_tag }} *
 	        </div>
             <div class="controls">
-            	{{ form.invoice_firstname.errors }}
+            	{% if form.invoice_firstname.errors %}<div class="alert alert-error">{{ form.invoice_firstname.errors.as_text}}</div>{% endif %}
                 {{ form.invoice_firstname }}
             </div>
 	    </div>
 	    <div class="control-group">
 	        <div class="control-label">
-                {{ form.invoice_lastname.label_tag }}*:
+                {{ form.invoice_lastname.label_tag }} *
             </div>
             <div class="controls">
-            	{{ form.invoice_lastname.errors }}
+            	{% if form.invoice_lastname.errors %}<div class="alert alert-error">{{ form.invoice_lastname.errors.as_text }}</div>{% endif %}
                 {{ form.invoice_lastname }}
             </div>
 	    </div>
@@ -23,7 +23,7 @@
                 {{ form.invoice_company_name.label_tag }}{% if settings.LFS_INVOICE_COMPANY_NAME_REQUIRED %}*{% endif %}:
             </div>
             <div class="controls">
-                {{ form.invoice_company_name.errors }}
+                {% if form.invoice_company_name.errors %}<div class="alert alert-error">{{ form.invoice_company_name.errors.as_text }}</div>{% endif %}
                 {{ form.invoice_company_name }}
             </div>
         </div>
@@ -33,7 +33,7 @@
                     {{ field.label_tag }}{% if field.field.required %}*{% endif %}:
                 </div>
                 <div class="controls">
-                    {{ field.errors }}
+                    {% if field.errors %}<div class="alert alert-error">{{ field.errors.as_text }}</div>{% endif %}
                     {{ field }}
                 </div>
             </div>
@@ -44,7 +44,7 @@
 		                {{ form.invoice_email.label_tag }}{% if settings.LFS_INVOICE_EMAIL_REQUIRED %}*{% endif %}:
 		        </div>
 		        <div class="controls">
-                    {{ form.invoice_email.errors }}
+                            {% if field.invoice_email.errors %}<div class="alert alert-error">{{ form.invoice_email.errors.as_text }}</div>{% endif %}
 		            {{ form.invoice_email }}
 		       </div>
 		    </div>
@@ -55,7 +55,7 @@
 		            {{ form.invoice_phone.label_tag }}{% if settings.LFS_INVOICE_PHONE_REQUIRED %}*{% endif %}:
 		        </div>
 		        <div class="controls">
-		        	{{ form.invoice_phone.errors }}
+	                    {% if field.invoice_phone %}<div class="alert alert-error">{{ form.invoice_phone.errors.as_text }}</div>{% endif %}
 		            {{ form.invoice_phone }}
 		        </div>
 		    </div>
