@@ -267,12 +267,13 @@
             {% endif %}
 
             <div class="pull-right">
+                <a class="btn"
+                   href="{% url lfs.cart.views.cart %}">{% trans 'Go to cart' %}</a>
                 <button class="btn"
                         type="submit">
                     {% trans 'Submit order' %}
                 </button>
-                <a class="btn"
-                   href="{% url lfs.cart.views.cart %}">{% trans 'Go to cart' %}</a>
+
             </div>
 
             {% if request.user.is_anonymous %}
