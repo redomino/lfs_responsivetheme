@@ -81,7 +81,7 @@
                     <td class="number">
                         <div class="product-price">
                             {% if product.for_sale %}
-                               <span class="for-sale-standard-price">{{ product.get_standard_price|currency:request }}</span>
+                               <span class="for-sale-standard-price">{{ product|get_standard_price:request|currency:request }}</span>
                                <span class="for-sale-price">{{ product|get_for_sale_price:request|currency:request }}</span>
                             {% else %}
                             <span class="standard-price">{{ product|get_price:request|currency:request }}</span>

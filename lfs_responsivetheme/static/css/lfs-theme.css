@@ -71,7 +71,8 @@ body.category .product-image {
     height: 275px;
     margin: 5px auto 0;
     text-align: center;
-    width: 275px;
+    /*width: 275px;*/
+    width: 100%;
 }
 
 body.category .product-image:before {
@@ -83,8 +84,8 @@ body.category .product-image:before {
 
 body.category .product-image img {
     display: inline-block;
-    max-height: 270px;
-    max-width: 270px;
+    max-height: 98%;
+    max-width: 98%;
     vertical-align: middle;
 }
 
