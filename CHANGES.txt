@@ -1,0 +1,8 @@
+CHANGES
+=======
+
+0.1 (unreleased)
+----------------
+
+- First release (no pypi)
+  [andreadeste]

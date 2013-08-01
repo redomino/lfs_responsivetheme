@@ -3,14 +3,13 @@ import os
 from setuptools import find_packages
 from setuptools import setup
 
-# lfs imports
-from lfs_responsivetheme import __version__
-
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.txt')).read()
 
+version = '0.1-dev'
+
 setup(name='lfs_responsivetheme',
-      version=__version__,
+      version=version,
       description='A responsive theme for LFS',
       long_description=README,
       classifiers=[
