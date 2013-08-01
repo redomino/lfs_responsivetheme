@@ -6,7 +6,7 @@ from setuptools import setup
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.txt')).read()
 
-version = '0.1-dev'
+version = '0.1dev'
 
 setup(name='lfs_responsivetheme',
       version=version,
