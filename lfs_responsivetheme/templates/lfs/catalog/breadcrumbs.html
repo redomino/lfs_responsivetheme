@@ -1,16 +1,18 @@
 {% load i18n %}
-<ul class="breadcrumb">
-    <li class="pull-left visible-lg" >
+<ol class="breadcrumb">
+    <!--
+    <li class="visible-sm" >
         <a href="{% url lfs_shop_view %}">
             {% trans 'Home' %}</a>
-    </li>
-    <li class="pull-left hidden-lg" >
-        <a href="{% url lfs_shop_view %}"><i class="glyphicon glyphicon-home" ></i></a>
+        </li>
+        -->
+    <li >
+        <a href="{% url lfs_shop_view %}"><i class="icon-home" ></i></a>
     </li>
 
     {% for object in objects %}
         <li {% if forloop.last %}class="last"{% endif %} >
-            <span class="divider">/</span>
+        <!--<span class="divider">/</span>-->
             {% if forloop.last %}
                 {{ object.name }}
             {% else %}
@@ -19,4 +21,4 @@
             {% endif %}
         </li>
     {% endfor %}
-</ul>
+</ol>

@@ -3,7 +3,7 @@
     <form action="{% url lfs_catalog_set_sorting %}"
           method="post">
         {% csrf_token %}
-        <select name="sorting"
+        <select name="sorting" class="form-control"
                 onchange="this.form.submit()">
             {% for item in sort_options %}
             <option value="{{ item.default }}"
