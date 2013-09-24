@@ -1,14 +1,14 @@
 {% load i18n %}
 {% load lfs_tags %}
 {% load reviews_tags %}
-<div id="product-inline" class="row-fluid">
+<div id="product-inline" class="row">
 
     <h1 class="product-title">
         {{ product.get_name }}
     </h1>
 
     {# Images #}
-    <div class="product-images span6">
+    <div class="product-images col-md-6">
         <div class="main-image">
             {% if product.get_image %}
                 <a href="{{ product.get_image.image.url_400x400 }}"
@@ -150,7 +150,7 @@
                         <div class="product-quantity packing-unit"
                             id="packing-url"
                             data="{% url lfs_calculate_packing product.id %}">
-                            <input class="number quantity input-small"
+                            <input class="number quantity input-sm"
                                    name="quantity"
                                    size="3"
                                    type="text"
@@ -166,7 +166,7 @@
                         {% endif %}
                     </td>
                     <td class="product-quantity">
-                        <input class="number input-small"
+                        <input class="number input-sm"
                                name="quantity"
                                size="3"
                                type="text"
@@ -175,7 +175,7 @@
                 {% endif %}
                 <td nowrap="nowrap">
                     <!--[if IE]><input type="text" style="display: none;" disabled="disabled" » size="20" value="Ignore field. IE bug fix. LFS issue #57" /><![endif]-->
-                    <button class="emphasized btn"
+                    <button class="emphasized btn btn-default"
                            type="submit"
                            name="add-to-cart">{% trans 'Add to cart' %}</button>
                 </td>

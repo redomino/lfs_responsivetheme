@@ -23,7 +23,7 @@
                value="{{ q }}"
                name="q" />
 
-        <input type="submit" class="btn search-button"
+        <input type="submit" class="btn btn-default search-button"
                value="{% trans 'Go!' %}">
     </form>
 
@@ -34,7 +34,7 @@
 
     {% if products %}
 
-        <div class="row-fluid">
+        <div class="row">
             {% if not paginator %}
                 {% autopaginate products 10 %}
             {% endif %}
@@ -48,7 +48,7 @@
 
         <table class="lfs-default padding-top table">
             <tr>
-                <th class="image-column span2">{% trans 'Image' %}</th>
+                <th class="image-column col-md-2">{% trans 'Image' %}</th>
                 <th class="detail-column">{% trans 'Product' %}</th>
                 <th class="number">{% trans 'Price' %}</th>
             <tr>
@@ -96,7 +96,7 @@
                     </td>
 <!--
                     <td class="buttons">
-                        <a class="btn"
+                        <a class="btn btn-default"
                            href="{% url lfs_product product.slug %}"
                            type="submit">
                             {% trans 'Details' %}

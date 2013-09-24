@@ -4,8 +4,8 @@
       action="{% url lfs_search %}"
       autocomplete="off">
       <input type="hidden" name="livesearch" value="1" />
-      <input class="input-large" value="{{ q }}" type="text" name="q" autocomplete="off" data-url="{% url lfs_livesearch %}" />
-      <input type="submit" class="btn"
+      <input class="input-lg" value="{{ q }}" type="text" name="q" autocomplete="off" data-url="{% url lfs_livesearch %}" />
+      <input type="submit" class="btn btn-default"
 	     value="{% trans 'Go!' %}" />
 </form>
 

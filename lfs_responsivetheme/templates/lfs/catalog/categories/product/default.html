@@ -9,7 +9,7 @@
 </div>
 {% endblock %}
 
-<div class="row-fluid">
+<div class="row">
     {% include "lfs/catalog/categories/product/products_navigation.html" %}
 
     <div class="pull-right clearfix">
@@ -18,7 +18,7 @@
 </div>
 
 <div id="products">
-    <div class="lfs-default row-fluid">
+    <div class="lfs-default row">
         {% for col in products %}
         <ul class="product-row thumbnails clearfix">
             {% for product in col %}

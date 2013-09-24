@@ -1,7 +1,7 @@
 {% for shipping_method in shipping_methods %}
     <div class="shipping-method container">
         {% if shipping_method.image %}
-            <div class="span1 pull-left">
+            <div class="col-md-1 pull-left">
                 <img class="payment-method"
                     src="{{ shipping_method.image.url }}"
                     alt="{{ shipping_method.name }}">

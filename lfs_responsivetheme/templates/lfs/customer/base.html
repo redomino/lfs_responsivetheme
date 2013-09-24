@@ -3,9 +3,9 @@
 {% load lfs_tags %}
 
 {% block wrapper %}
-    <div class="span3">
+    <div class="col-md-3">
         {% block left-slot %}
-            <div class="portlet categories-portlet hidden-phone">
+            <div class="portlet categories-portlet hidden-sm">
                 <div class="portlet-header popover-title">{% trans 'My account' %}</div>
                 <div class="portlet-body popover-content">
                     <ul class="nav nav-list">
@@ -29,7 +29,7 @@
             </div>
         {% endblock %}
     </div>
-    <div class="span9 last">
+    <div class="col-md-9 last">
         {% block content %}{% endblock %}
     </div>
 {% endblock %}

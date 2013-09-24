@@ -17,8 +17,8 @@
         {% trans 'Please select!' %}
     </h1>
 
-    <div class="row-fluid">
-    <div class="login span4">
+    <div class="row">
+    <div class="login col-md-4">
         <h2 class="authenticate">{% trans 'Login' %}</h2>
 
         <p class="description">
@@ -44,14 +44,14 @@
                    value="{% url lfs_checkout %}" />
 
             <button type="submit"
-                    class="btn"
+                    class="btn btn-default"
                     href="{% url lfs_checkout %}">{% trans 'Login' %}</button>
             <a class="bnt forgot-password-link" href="{% url lfs_password_reset %}">{% trans 'Forgot password?' %}</a>
         </form>
     </div>
 
     {% if not ANON_ONLY %}
-        <div class="register span4">
+        <div class="register col-md-4">
             <h2 class="authenticate">{% trans 'Register' %}</h2>
 
             <p class="description">
@@ -74,7 +74,7 @@
                            name="next"
                            value="{% url lfs_checkout %}" />
 
-                    <button class="btn"
+                    <button class="btn btn-default"
                             type="submit"
                             href="{% url lfs_checkout %}">{% trans "Register" %}</button>
             </form>
@@ -82,7 +82,7 @@
         </div>
     {% endif %}
     {% if anonymous_checkout %}
-        <div class="anonymous-checkout span4">
+        <div class="anonymous-checkout col-md-4">
             <h2 class="authenticate">{% trans 'Checkout' %}</h2>
 
             <div class="description">
@@ -91,7 +91,7 @@
 
             <div class="form-wrapper">&nbsp;</div>
 
-            <a class="btn"
+            <a class="btn btn-default"
                href="{% url lfs_checkout %}">
                {% trans 'Checkout' %}
             </a>

@@ -236,7 +236,7 @@
             {% endif %}
 
             {# Cart #}
-            <div id="cart-inline row-fluid">
+            <div id="cart-inline row">
                 {{ cart_inline }}
             </div>
 
@@ -252,13 +252,13 @@
 
 
             {% if SHOP.confirm_toc %}
-            <div class="row-fluid">
-                <div class="span6">
+            <div class="row">
+                <div class="col-md-6">
                 {% if form.errors.confirm_toc %}
                 <div class="alert alert-error">{{ form.errors.confirm_toc }}</div>
                 {% endif %}
 
-                <label class="checkbox inline" for="confirm_toc">
+                <label class="checkbox-inline" for="confirm_toc">
                     <input type="checkbox" name="confirm_toc" id="confirm_toc" />
                     <a href="/term-and-conditions" >{% trans "Accept terms and conditions" %}</a>
                 </label>
@@ -267,9 +267,9 @@
             {% endif %}
 
             <div class="pull-right">
-                <a class="btn"
+                <a class="btn btn-default"
                    href="{% url lfs.cart.views.cart %}">{% trans 'Go to cart' %}</a>
-                <button class="btn"
+                <button class="btn btn-default"
                         type="submit">
                     {% trans 'Submit order' %}
                 </button>

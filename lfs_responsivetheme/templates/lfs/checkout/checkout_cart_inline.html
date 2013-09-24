@@ -30,10 +30,10 @@
                 colspan="2">
                 {% trans 'Quantity' %}
             </th>
-            <th class="number hidden-phone">
+            <th class="number hidden-sm">
                 {% trans 'Net Price' %}
             </th>
-            <th class="number hidden-phone">
+            <th class="number hidden-sm">
                 {% trans 'VAT' %}
             </th>
             <th class="number">
@@ -45,7 +45,7 @@
         {% for cart_item in cart_items %}
             <tr>
                 <td class="image">
-                    <a href="{{ cart_item.product.get_absolute_url }}" class="hidden-phone">
+                    <a href="{{ cart_item.product.get_absolute_url }}" class="hidden-sm">
                         <img src="{{ cart_item.product.get_image.image.url_60x60 }}"
                              alt="{{ cart_item.product.get_name }}"/>
                     </a>
@@ -79,7 +79,7 @@
                 <td class="number">
                     {{ cart_item.quantity }}
                 </td>
-                <td class="padding-left hidden-phone">
+                <td class="padding-left hidden-sm">
                     {{ cart_item.product.get_unit }}
                     {% if cart_item.product.get_active_packing_unit %}
                         <span class="packing-unit">
@@ -87,7 +87,7 @@
                         </span>
                     {% endif %}
                 </td>
-                <td class="number hidden-phone">
+                <td class="number hidden-sm">
                     {{ cart_item.product_price_net|currency:request}}
                 </td>
                 <td class="number">

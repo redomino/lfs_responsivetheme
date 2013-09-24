@@ -60,7 +60,7 @@
                             {{ product_accessory.get_price|currency:request }}
                         </td>
                         <td class="right">
-                            <a class="btn"
+                            <a class="btn btn-default"
                                rel="nofollow"
                                href="{% url lfs_add_accessory_to_cart product_accessory.accessory.id product_accessory.quantity %}">
                                {% trans 'Add' %}
@@ -73,15 +73,15 @@
     {% endif %}
 
     <div class="buttons">
-        <a class="btn"
+        <a class="btn btn-default"
            href="{% url lfs_checkout_dispatcher %}">
             {% trans 'Checkout' %}
         </a>
-        <a class="btn"
+        <a class="btn btn-default"
            href="{% url lfs.cart.views.cart %}">
             {% trans 'Go to cart' %}
         </a>
-        <a class="btn"
+        <a class="btn btn-default"
            href="{{ shopping_url }}">
             {% trans 'Go on shopping' %}
         </a>

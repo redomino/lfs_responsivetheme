@@ -41,20 +41,20 @@
 
     </head>
     <body class="{% block section %}lfs{% endblock %} {% ifequal request.path '/' %}home-page{% endifequal %} container">
-        <div class="header visible-desktop">
-            <div class="container row-fluid">
+        <div class="header visible-lg">
+            <div class="container row">
                 {% block header %}
-                    <div class="span4 logo">
+                    <div class="col-md-4 logo">
                         <a href="{% url lfs.core.views.shop_view %}">
                             <img class="logo"
                                  src="{{ STATIC_URL }}img/logo.jpg"
                                  alt="Logo" />
                         </a>
                     </div>
-                    <div class="span4 search">
+                    <div class="col-md-4 search">
                         {% include "lfs/search_form.html" %}
                     </div>
-                    <div class="span4 cart">
+                    <div class="col-md-4 cart">
                         <div class="pull-right">
                         {% include "lfs/user_actions.html" %}
 
@@ -70,31 +70,31 @@
             </div>
         </div>
 
-        <div class="header hidden-desktop">
+        <div class="header hidden-lg">
             <div class="">
                 {% block mobile_header %}
 
                     <div >
                         <div class="navbar navbar-fixed-top" >
                             <div class="navbar-inner" id="mobile-navbar">
-                                <a href="{% url lfs.core.views.shop_view %}" class="brand">{{ SHOP.get_meta_title }}</a>
-                                <div class="btn-group pull-right" data-toggle="buttons-radio">
-                                <button data-target=".user-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
-                                    <span class="icon-user"></span>           
+                                <a href="{% url lfs.core.views.shop_view %}" class="navbar-brand">{{ SHOP.get_meta_title }}</a>
+                                <div class="btn btn-default-group pull-right" data-toggle="buttons-radio">
+                                <button data-target=".user-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-user"></span>           
                                 </button>
-                                <button data-target=".search-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
-                                    <span class="icon-search"></span>
+                                <button data-target=".search-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
                                 </button>
-                                <button data-target=".cart-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
-                                    <span class="icon-briefcase"></span>
+                                <button data-target=".cart-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-briefcase"></span>
                                 </button>
-                                <button data-target=".nav-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn" type="button">
-                                    <span class="icon-list"></span>
+                                <button data-target=".navbar-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-list"></span>
                                 </button>
                                 </div>
 
                                 <div class="accordion-group" style="border:none;">
-                                    <div class="nav-collapse accordion-body collapse">
+                                    <div class="navbar-collapse accordion-body collapse">
                                        {% menu_top_level_categories %}
                                     </div>
 
@@ -129,7 +129,7 @@
         </div>
 -->
 
-        <div class="navbar visible-desktop">
+        <div class="navbar visible-lg">
             <div class="navbar-inner">
                 {% block top_level_categories %}
                         {% menu_top_level_categories %}
@@ -140,13 +140,13 @@
         {% block breadcrumbs %}{% endblock %}
 
         <div class="container">
-            <div class="row-fluid">
+            <div class="row">
                 {% slots_information %}
 
                 {% block wrapper %}
                     {% block left-slot-wrapper %}
                         {% if SlotLeft %}
-                            <div class="span3 bs-docs-sidebar hidden-phone">
+                            <div class="col-md-3 bs-docs-sidebar hidden-sm">
                                 <div class="left-slot">
                                     {% block left-slot %}
                                         {% lfs_portlet_slot 'Left' %}
@@ -162,7 +162,7 @@
                     </div>
                     {% block right-slot-wrapper %}
                         {% if SlotRight %}
-                            <div class="span-4 last hidden-phone">
+                            <div class="span-4 last hidden-sm">
                                 <div class="right-slot">
                                     {% block right-slot %}
                                         {% lfs_portlet_slot 'Right' %}
@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        <div class="footer row-fluid">
+        <div class="footer row">
             <div class="container">
                 {% block footer %}
                     {% actions Footer %}
@@ -188,7 +188,7 @@
         </div>
 
 
-        <div class="colophon row-fluid">
+        <div class="colophon row">
             <div class="container">
                 {% block colophon %}
                     <p>{% trans 'Powered by' %} <a target="_blank" href="http://www.getlfs.com">LFS</a> &mdash; Lightning Fast Shop</p>

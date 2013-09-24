@@ -5,7 +5,7 @@
     {% for payment_method in payment_methods %}
         <div class="payment-method container">
             {% if payment_method.image %}
-                <div class="span1 pull-left">
+                <div class="col-md-1 pull-left">
                     <img class="payment-method"
                          src="{{ payment_method.image.url }}"
                          alt="{{ payment_method.name }}">
