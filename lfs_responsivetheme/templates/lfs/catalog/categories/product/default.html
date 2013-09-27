@@ -1,7 +1,7 @@
 {% load i18n lfs_tags %}
 
 {% block products-header %}
-<h1 class="first-heading page-header">
+<h1 class="first-heading">
     {{ category.name }}
 </h1>
 <div class="description">
@@ -20,15 +20,15 @@
 <div id="products">
     <div class="lfs-default row">
         {% for col in products %}
-        <ul class="product-row thumbnails clearfix">
+        <ul class="product-row thumbnails clearfix nav">
             {% for product in col %}
-                <li class="product-data span{% widthratio 12 col|length 1 %}">
-                    <div >
-                        <div class="thumbnailzz">
+                <li class="product-data col-md-{% widthratio 12 col|length 1 %} ">
+                    <div class="thumbnail" style="margin-bottom: 20px;">
+                        <div class="thumbnailz">
                             <a href="{% url lfs.catalog.views.product_view product.slug %}">
-                                {% if product.image.url_300x300 %}
+                                {% if product.image.url_200x200 %}
                                     <img alt="{{ product.name }}" class="img-rounded"
-                                         src="{{ product.image.url_300x300 }}" />
+                                         src="{{ product.image.url_200x200 }}" />
                                {% endif %}
                             </a>
                         </div>

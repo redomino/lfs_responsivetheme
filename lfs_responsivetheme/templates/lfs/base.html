@@ -28,6 +28,8 @@
  
         <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" >
         <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
+        <link href="{{ STATIC_URL }}css/theme.css" rel="stylesheet" >
+
         <!--
         <link href="{{ STATIC_URL }}css/swipebox.css" rel="stylesheet" >
         <link href="{{ STATIC_URL }}css/lfs-theme.css" rel="stylesheet" media="screen">
@@ -42,7 +44,8 @@
 
 
     </head>
-    <body class="{% block section %}lfs{% endblock %} {% ifequal request.path '/' %}home-page{% endifequal %} container">
+    <body class="{% block section %}lfs{% endblock %} {% ifequal request.path '/' %}home-page{% endifequal %}">
+        <div class="main-wrapper container">
         <div class="header hidden-sm hidden-xs">
             <div class="row">
                 {% block header %}
@@ -53,7 +56,7 @@
                                  alt="Logo" />
                         </a>
                     </div>
-                    <div class="col-md-4 search">
+                    <div class="col-md-4 search text-center">
                         {% include "lfs/search_form.html" %}
                     </div>
                     <div class="col-md-4 cart">
@@ -161,6 +164,9 @@
                 {% endblock %}
             </div>
 
+        </div>
+        <div class="footer-container">
+            <div class="container">
         <div class="footer row">
             <div class="col-md-12">                
                 {% block footer %}
@@ -185,7 +191,7 @@
                 {% endblock %}
             </div>
         </div>
-
+        </div></div>
         {% compress js %}
             <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery-1.7.2.min.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}js/ios-orientationchange-fix.js"></script>

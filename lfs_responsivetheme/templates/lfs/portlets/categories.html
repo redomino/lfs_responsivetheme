@@ -2,12 +2,14 @@
 {% load lfs_tags %}
 
 {% if categories %}
-    <div class="portlet categories-portlet">
-        <div class="portlet-header popover-title">
+<div class="portlet categories-portlet panel panel-default">
+    <!--
+        <div class="portlet-header ">
             {{ title }}
         </div>
-        <div class="portlet-body popover-content">
-            <ul class="nav nav-list">
+        -->
+        <div class="portlet-body panel-body">
+            <ul class="nav">
                 {% for category in categories %}
                     <li class="level-{{ category.level }} {% if forloop.last %}last{% endif %} {% if category.is_current %} active {% endif %}  " >
                         <a href="{{ category.category.get_absolute_url }}">

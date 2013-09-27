@@ -1,7 +1,7 @@
 {% load i18n lfs_tags %}
 
 <div class="cart-portlet portlet">
-
+<!--
     <div class="portlet-header popover-title">
         {% if title %}
             <a href="{% url lfs.cart.views.cart %}"
@@ -13,8 +13,8 @@
              alt="{% trans 'Cart' %}" />
         </a>
     </div>
-
-    <div class="portlet-body popover-content">
+    -->
+    <div class="portlet-body">
         {% if amount_of_items_int %}
             <div class="article">
                 {% blocktrans with amount=amount_of_items_locale count counter=amount_of_items_int %}{{ amount }} Article{% plural %}{{ amount }} Articles{% endblocktrans %}
@@ -25,12 +25,14 @@
         {% else %}
             {% trans 'Cart is empty' %}
         {% endif %}
+        <img src="{{ STATIC_URL }}img/cart.png"
+            alt="{% trans 'Cart' %}" />
     </div>
-
+<!--
     <div class="portlet-footer popover-content">
         <a href="{% url lfs.cart.views.cart %}">
             {% trans 'Go to cart' %}
         </a>
     </div>
-
+    -->
 </div>

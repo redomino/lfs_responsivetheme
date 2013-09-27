@@ -1,5 +1,5 @@
 {% load i18n lfs_tags %}
-<div class="useractions">
+<div class="useractions text-right">
 {% if user.is_authenticated %}
     {% if user.first_name %}
 	<span>{{ user.first_name }} {{user.last_name}}</span>
@@ -27,7 +27,7 @@
     <a href="{% url lfs_my_account %}">{% trans 'My account' %}</a>
 {% else %}
     {% if not ANON_ONLY %}
-	<a href="{% url lfs_login %}">{% trans 'Login' %}</a> |
+	<a href="{% url lfs_login %}">{% trans 'Login' %}</a>
     {% endif %}
 
 {% endif %}
