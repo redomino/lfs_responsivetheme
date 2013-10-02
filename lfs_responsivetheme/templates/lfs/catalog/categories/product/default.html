@@ -10,10 +10,12 @@
 {% endblock %}
 
 <div class="row">
-    {% include "lfs/catalog/categories/product/products_navigation.html" %}
+    <div class="col-md-12">
+        {% include "lfs/catalog/categories/product/products_navigation.html" %}
 
-    <div class="pull-right clearfix">
-        {% sorting %}
+        <div class="pull-right clearfix">
+            {% sorting %}
+        </div>
     </div>
 </div>
 

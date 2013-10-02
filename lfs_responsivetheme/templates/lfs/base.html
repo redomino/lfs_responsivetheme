@@ -28,10 +28,11 @@
  
         <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" >
         <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
+        <link href="{{ STATIC_URL }}css/swipebox.css" rel="stylesheet" >
+        <link href="{{ STATIC_URL }}css/jquery.lightbox-0.5.css" rel="stylesheet">
         <link href="{{ STATIC_URL }}css/theme.css" rel="stylesheet" >
 
         <!--
-        <link href="{{ STATIC_URL }}css/swipebox.css" rel="stylesheet" >
         <link href="{{ STATIC_URL }}css/lfs-theme.css" rel="stylesheet" media="screen">
         -->
 
@@ -200,11 +201,13 @@
             <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery.jgrowl_minimized.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery.cookie.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}jquery/lightbox/jquery.lightbox-0.5.js"></script>
-            <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.swipebox.min.js"></script>
+            <!--<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.swipebox.min.js"></script>-->
             <script type="text/javascript" src="{{ STATIC_URL }}js/lfs.js"></script>
             <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+            <!--<script src="{{ STATIC_URL }}js/theme.js"></script>-->
         {% endcompress %}
 
+        {% block local_js %}{% endblock %}
         {% block google-analytics-tracking %}
             {% google_analytics_tracking %}
         {% endblock %}

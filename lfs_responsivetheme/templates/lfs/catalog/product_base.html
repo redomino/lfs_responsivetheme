@@ -40,10 +40,11 @@
             {{ product_inline|safe }}
         </form>
     </div>
-
+<!--
     <a name="reviews"></a>
 
     {% reviews_for_instance product %}
+    -->
 
     {% tags_for_object product as tags %}
     {% if tags %}
@@ -72,3 +73,14 @@
     {% related_products_by_tags product %}
 
 {% endblock %}
+
+{% block local_js %}
+<script type="text/javascript">
+    $('#myTab a').click(function (e) {
+              e.preventDefault()
+                $(this).tab('show')
+                })
+
+    </script>
+{% endblock %}
+

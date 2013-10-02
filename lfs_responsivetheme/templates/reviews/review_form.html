@@ -4,26 +4,30 @@
 {% block section %}add-review {% endblock %}
 
 {% block breadcrumbs %}
-    {% breadcrumbs object _('Add Review') %}
+    {% breadcrumbs  _('Add Review') %}
 {% endblock %}
 
 {% block content %}
 
     <h1>{% trans 'Add Review' %} {% trans "for" %} {{ object.get_name }}</h1>
 
-    {% if object.get_image.image %}
-        <img class="image-left"
-             src="{{ object.get_image.image.url_200x200 }}" />
-    {% endif %}
+    <div class="row">
 
-    <br clear="all" />
+        <div class="col-md-5">
+            {% if object.get_image.image %}
+                <img class="image-left"
+                    src="{{ object.get_image.image.url_200x200 }}" />
+             {% endif %}
+        </div>
+
+    <div class="col-md-7">
 
     <form action="{% url reviews_add content_type_id content_id %}"
-          method="post">
+          method="post" role="form" class="">
         {% csrf_token %}
         {% if request.user.is_anonymous %}
-            <div class="field">
-                <div class="label">
+            <div class="field form-group">
+                <div class="">
                     {{ form.user_name.label_tag }}:
                 </div>
 
@@ -33,14 +37,14 @@
                         {{ form.user_name.errors }}
                     </div>
                 {% else %}
-                    <div>
+                    <div class="form-group">
                         {{ form.user_name }}
                     </div>
                 {% endif %}
             </div>
 
-            <div class="field">
-                <div class="label">
+            <div class="field form-group">
+                <div class="">
                     {{ form.user_email.label_tag }}:
                 </div>
 
@@ -50,14 +54,14 @@
                         {{ form.user_email.errors }}
                     </div>
                 {% else %}
-                    <div>
+                    <div class="form-group">
                         {{ form.user_email }}
                     </div>
                 {% endif %}
             </div>
         {% endif %}
 
-        <div class="label">
+        <div class="">
             {{ form.score.label_tag }}:
         </div>
         <div class="star-rating-wrapper">
@@ -79,7 +83,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="field">
+        <div class="field form-group">
             <div class="label">
                 {{ form.comment.label_tag }}:
             </div>
@@ -110,13 +114,23 @@
                value="{{ content_id }}" />
 
         {% if show_preview %}
-            <input type="submit"
+            <input type="submit" class="btn btn-default"
                    value="{% trans 'Preview' %}" />
         {% else %}
-            <input type="submit"
+            <input type="submit" class="btn btn-default"
                    value="{% trans 'Send' %}" />
         {% endif %}
 
     </form>
+</div>
 
 {% endblock %}
+
+
+{% block local_js %}
+<script>
+    $('.rate').on('click', function() {return false});
+    $('.form-group input, .form-group textarea').addClass('form-control');
+</script>
+{% endblock %}
+
