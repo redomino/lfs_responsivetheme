@@ -15,15 +15,18 @@
     </div>
     -->
     <div class="portlet-body">
-        <a href="{% url lfs.cart.views.cart %}"><i class="icon-shopping-cart" ></i></a>
+
         {% if amount_of_items_int %}
-            <span class="article">
-                {% blocktrans with amount=amount_of_items_locale count counter=amount_of_items_int %}{{ amount }} Article{% plural %}{{ amount }} Articles{% endblocktrans %}
-            </span>
-            <span class="price">
-                {{ price|currency:request }}
-            </span>
+            <a href="{% url lfs.cart.views.cart %}"><i class="icon-shopping-cart" ></i>
+                <span class="article">
+                    {% blocktrans with amount=amount_of_items_locale count counter=amount_of_items_int %}{{ amount }} Article{% plural %}{{ amount }} Articles{% endblocktrans %}
+                </span>
+                <span class="price">
+                    {{ price|currency:request }}
+                </span>
+            </a>
         {% else %}
+            <i class="icon-shopping-cart" ></i>
             {% trans 'Cart is empty' %}
         {% endif %}
     </div>

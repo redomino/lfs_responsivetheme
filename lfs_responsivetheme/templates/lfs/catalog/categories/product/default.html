@@ -25,8 +25,8 @@
         <ul class="product-row thumbnails clearfix nav">
             {% for product in col %}
                 <li class="product-data col-md-{% widthratio 12 col|length 1 %} ">
-                    <div class="thumbnail" style="margin-bottom: 20px;">
-                        <div class="thumbnailz">
+                    <div class="thumbnail">
+                        <div class="text-center">
                             <a href="{% url lfs.catalog.views.product_view product.slug %}">
                                 {% if product.image.url_200x200 %}
                                     <img alt="{{ product.name }}" class="img-rounded"
@@ -44,22 +44,22 @@
 
                             {% category_product_prices_gross product.obj.id %}
          
-                            <div class="product-price">
+                            <h3 class="product-price text-center">
                                 {% if price_starting_from %}
                                     {% trans "Starting at" %}
                                 {% endif %}
                                 {% if product.obj.get_for_sale %}
-                                   <span class="for-sale-standard-price">{{ standard_price|currency:request }}*</span>
-                                   <span class="for-sale-price">{{ price|currency:request }}*</span>
+                                   <span class="for-sale-standard-price">{{ standard_price|currency:request }}</span>
+                                   <span class="for-sale-price">{{ price|currency:request }}</span>
                                 {% else %}
-                                   <span class="standard-price">{{ price|currency:request }}*</span>
+                                   <span class="standard-price">{{ price|currency:request }}</span>
                                 {% endif %}
                                 {% if product.price_unit %}
                                     / {{ product.price_unit }}
                                 {% endif %}
                                 {% if product.obj.get_active_packing_unit %}
                                     <div class="base-price">
-                                        {{ base_packing_price|currency:request }}* / {{ product.obj.get_packing_info.1 }}
+                                        {{ base_packing_price|currency:request }} / {{ product.obj.get_packing_info.1 }}
                                     </div>
                                 {% endif %}
                                 {% if product.obj.get_active_base_price %}
@@ -67,7 +67,7 @@
                                         {% if base_price_starting_from %}
                                             {% trans "Starting at" %}
                                         {% endif %}
-                                        {{ base_price|currency:request }}*
+                                        {{ base_price|currency:request }}
                                         {% if product.obj.get_base_price_unit %}
                                             / {{ product.obj.get_base_price_unit }}
                                         {% endif %}
@@ -75,12 +75,12 @@
                                 {% endif %}
                                 <div class="price-disclaimer">
                                     {% if product.price_includes_tax %}
-                                        {% trans '*inc. VAT' %}
+                                        {% trans 'inc. VAT' %}
                                     {% else  %}
-                                        {% trans '*exc. VAT' %}
+                                        {% trans 'exc. VAT' %}
                                    {% endif %}
                                 </div>
-                            </div>
+                            </h3>
                         </div>
 
 

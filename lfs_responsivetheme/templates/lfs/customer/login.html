@@ -31,9 +31,7 @@
               method="post" role="form">
             {% csrf_token %}
 
-            <div class="form-group">
-                    {{ login_form }}
-            </div>
+           {{ login_form }}
 
             <input type="hidden"
                    name="action"
@@ -83,6 +81,8 @@
 
 <script type="text/javascript">
     $("#id_username").focus();
-    $('.form-group input').addClass('form-control');
+    $('.form').addClass('form-group');
+    $('.form input').addClass('form-control');
+
 </script>
 {% endblock %}

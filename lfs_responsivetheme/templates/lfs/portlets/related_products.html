@@ -10,8 +10,8 @@
 
         <div class="portlet-body panel-body">
             {% for related_product in product.get_related_products %}
-                <div class="portlet-item">
-                    <img alt="{{related_product.get_name}}"
+                <div class="portlet-item clearfix">
+                    <img alt="{{related_product.get_name}}" class="pull-left"
                          src="{{related_product.get_image.image.url_60x60}}" />
                     <div>
                         <a href="{{related_product.get_absolute_url}}">

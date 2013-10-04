@@ -1,9 +1,19 @@
 {% load i18n %}
 {% load lfs_tags %}
 {% load reviews_tags %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <div id="product-inline" class="row">
 
-    <h1 class="product-title">
+    <h1 class="product-title col-md-12">
         {{ product.get_name }}
     </h1>
 
@@ -35,50 +45,50 @@
 
     <div class="col-md-7 col-sm-7 col-lg-7 text-right">
 
-        {% average_for_instance product %}
+
         {# Prices #}
-        <div class="prices">
+        <div class="prices btn btn-info text-right">
             {% if for_sale %}
                 <div>
                     <span class="for-sale-standard-price" nowrap="nowrap">
                         <span class="for-sale-standard-price-value">
                             {{ product|get_standard_price_gross:request|currency:request }}
                         </span>
-                        * {% if price_unit %}/ {{ price_unit }}{% endif %}</span>
-                    <span class="for-sale-price" nowrap="nowrap">
+                        {% if price_unit %}/ {{ price_unit }}{% endif %}</span>
+                    <h2 class="for-sale-price" nowrap="nowrap">
                         <span class="for-sale-price-value">
                             {{ product|get_for_sale_price_gross:request|currency:request }}
                         </span>
-                        * {% if price_unit %}/ {{ price_unit }}{% endif %}
-                    </span>
+                        {% if price_unit %}/ {{ price_unit }}{% endif %}
+                    </h2>
                 </div>
                 {% if product.get_active_base_price %}
-                    <div class="base-price">
-                        {{ product|get_base_price_gross:request|currency:request }} / {{ product.get_base_price_unit }}*
-                    </div>
+                    <h2 class="base-price">
+                        {{ product|get_base_price_gross:request|currency:request }} / {{ product.get_base_price_unit }}
+                    </h2>
                 {% endif %}
                 <div class="price-disclaimer">
                     {% if price_includes_tax %}
-                        {% trans '*inc. VAT' %}
+                        {% trans 'inc. VAT' %}
                     {% else  %}
-                        {% trans '*exc. VAT' %}
+                        {% trans 'exc. VAT' %}
                     {% endif %}
                 </div>
             {% else %}
                 <div class="standard-price"
                       nowrap="nowrap">
-                      <h2 class="standard-price-value">{{ product|get_price_gross:request|currency:request }}<small>* {% if price_unit %}/ {{ price_unit }}{% endif %}</small></h2>
+                      <h2 class="standard-price-value">{{ product|get_price_gross:request|currency:request }}<small> {% if price_unit %}/ {{ price_unit }}{% endif %}</small></h2>
                 </div>
                 {% if product.get_active_base_price %}
-                    <div class="base-price">
-                        {{ product|get_base_price_gross:request|currency:request }} / {{ product.get_base_price_unit }}*
-                    </div>
+                    <h2 class="base-price">
+                        {{ product|get_base_price_gross:request|currency:request }} / {{ product.get_base_price_unit }}
+                    </h2>
                 {% endif %}
                 <div class="price-disclaimer">
                     {% if price_includes_tax %}
-                        {% trans '*inc. VAT' %}
+                        {% trans 'inc. VAT' %}
                     {% else  %}
-                        {% trans '*exc. VAT' %}
+                        {% trans 'exc. VAT' %}
                     {% endif %}
                 </div>
             {% endif %}
@@ -146,31 +156,35 @@
 
         {% if product.is_deliverable %}
             <div class="buttons form-inline clearfix">
-                    {% if product.get_active_packing_unit %}
-                            <div class="product-quantity packing-unit"
-                                id="packing-url"
-                                data="{% url lfs_calculate_packing product.id %}">
-                                <input class="number quantity input-sm"
-                                       name="quantity"
-                                       size="3"
-                                       type="text"
-                                       value="{{ quantity }}" /> {{ unit }}
-                            </div>
+                {% if product.get_active_packing_unit %}
+                    <div class="product-quantity packing-unit form-group"
+                        id="packing-url"
+                        data="{% url lfs_calculate_packing product.id %}">
+                        <input class="number quantity input-sm"
+                            name="quantity"
+                            size="3"
+                            type="text"
+                            value="{{ quantity }}" /> {{ unit }}
+                    </div>
+                {% else %}
+                    {% if unit %}
+                        {{ unit }}:
                     {% else %}
-                            {% if unit %}
-                                {{ unit }}:
-                            {% else %}
-                                {% trans "Quantity" %}:
-                            {% endif %}
-                            <input class="number input-sm"
-                                   name="quantity"
-                                   size="3"
-                                   type="text"
-                                   value="{{ quantity }}" />
+                        {% trans "Quantity" %}:
                     {% endif %}
-                        <button class="emphasized btn btn-default"
-                               type="submit"
-                               name="add-to-cart">{% trans 'Add to cart' %}</button>
+                    <div class="form-group">
+                        <input class="number input-sm"
+                               name="quantity"
+                               size="3"
+                               type="text"
+                               value="{{ quantity }}" />
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <button class="emphasized btn btn-default"
+                        type="submit"
+                        name="add-to-cart">{% trans 'Add to cart' %}</button>
+                </div>
             </div>
             <div class="packing-result">
                 {{ packing_result }}
@@ -180,6 +194,14 @@
                     onclick="window.location='{% url lfs_contact_form %}'; return false"
                     name="">{% trans 'Send request' %}</button>
         {% endif %}
+
+    <div class="col-md-12 big-stars clearfix">
+          {% average_for_instance product %}
+    </div>
+
+    <div class="col-md-12 social">
+        <div class="fb-like" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="false" data-send="false"></div>
+    </div>
 
     </div>
     <div class="clearfix"></div>
@@ -199,7 +221,10 @@
         <li><a href="#accessories">{% trans 'Accessories' %}</a></li>
         {% endif %}
 
-        <li><a href="#reviews">{% trans 'Reviews' %}</a></li>
+        <li>
+            <div class="small-stars pull-right">{% average_for_instance product %}</div>
+            <a href="#reviews">{% trans 'Reviews' %}</a>
+        </li>
     </ul>
 
     <div class="tab-content">
@@ -311,38 +336,39 @@
 
     <div class="tab-pane" id="accessories">
         <div class="accessories">
-            <table class="product-accessories lfs-default">
+            <table class="product-accessories table">
                 <tr>
-                    <th></th>
                     <th>{% trans 'Name' %}</th>
-                    <th class="number">{% trans 'Quantity' %}</th>
-                    <th class="number">{% trans 'Price' %}</th>
-                    <th class="number last">{% trans 'Total' %}</th>
+                    <th class="number text-center">{% trans 'Quantity' %}</th>
+                    <th class="number text-center">{% trans 'Price' %}</th>
+                    <th class="number text-center">{% trans 'Total' %}</th>
+                    <th class="number last text-center">{% trans 'Add' %}</th>
                 </tr>
                 {% for product_accessory in product_accessories %}
                     <tr>
-                        <td class="checkbox-left">
-                            <input type="checkbox"
-                                   name="accessory-{{ product_accessory.accessory.id }}"/>
-                        </td>
-                        <td>
+                        <td class="text-left">
                             <a href="{{ product_accessory.accessory.get_absolute_url }}">
+                                <img src="{{ product_accessory.accessory.get_image.image.url_60x60 }}" alt="{{ product_accessory.accessory.get_name }}" />
                                 {{ product_accessory.accessory.get_name|truncatewords_html:5 }}
                             </a>
                         </td>
-                        <td class="number">
+                        <td class="number text-center">
                             <input type="hidden"
                                    name="quantity-{{ product_accessory.accessory.id }}"
                                    value="{{ product_accessory.quantity }}" />
                             {{ product_accessory.quantity|quantity }}
                         </td>
-                        <td class="number"
+                        <td class="number text-center"
                             nowrap="nowrap">
                             {{ product_accessory.accessory|get_price:request|currency:request}}
                         </td>
-                        <td class="number"
+                        <td class="number text-center"
                              nowrap="nowrap">
                             {{ product_accessory|get_price:request|currency:request}}
+                        </td>
+                        <td class="checkbox-left text-center">
+                            <input type="checkbox"
+                                   name="accessory-{{ product_accessory.accessory.id }}"/>
                         </td>
                     </tr>
                 {% endfor %}
