@@ -14,12 +14,12 @@
         </a>
     </div>
     -->
-    <div class="portlet-body">
+    <div class="portlet-body panel panel-default">
 
         {% if amount_of_items_int %}
             <a href="{% url lfs.cart.views.cart %}"><i class="icon-shopping-cart" ></i>
                 <span class="article">
-                    {% blocktrans with amount=amount_of_items_locale count counter=amount_of_items_int %}{{ amount }} Article{% plural %}{{ amount }} Articles{% endblocktrans %}
+                    {% blocktrans with amount=amount_of_items_locale count counter=amount_of_items_int %}{{ amount_of_items_int }} Article{% plural %}{{ amount_of_items_int }} Articles{% endblocktrans %}
                 </span>
                 <span class="price">
                     {{ price|currency:request }}

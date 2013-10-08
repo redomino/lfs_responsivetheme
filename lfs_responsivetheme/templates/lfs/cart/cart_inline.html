@@ -138,7 +138,7 @@
             {% endfor %}
 
             {% if display_voucher %}
-                <tr id="voucher-display">
+            <tr id="voucher-display" class="{% if display_voucher %}success{% endif %}">
                     <td></td>
                     <td class="product-title left">
                         {% trans "Voucher" %}
@@ -277,21 +277,25 @@
             <h1 class="first-heading col-md-12">
                 {% trans "Voucher" %}
             </h1>
-            <div class="col-md-2">
-                <input data="{% url lfs_check_voucher_cart %}"
-                       type="text"
-                       id="voucher"
-                       name="voucher"
-                       value="{{ voucher_number }}"
-                       size="30"
-                       class="form-control col-md-2" />
+
+            {% if voucher_number and voucher_message %}
+                <div class="voucher-message alert {% if display_voucher %}alert-success{% else %}alert-warning{% endif %}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ voucher_message }}
+                </div>
+            {% endif %}    
+            <div class="col-md-2 input-group">
+                 <input data="{% url lfs_check_voucher_cart %}"
+                        type="text"
+                        id="voucher"
+                        name="voucher"
+                        value="{{ voucher_number }}"
+                        size="30"
+                        class="form-control col-md-2" />
+                  <span class="input-group-addon" ><i class="icon-refresh"></i></span>
              </div>
                    
-            {% if voucher_number and voucher_message %}
-                <span class="voucher-message">
-                    {{ voucher_message }}
-                </span>
-            {% endif %}
+
         </div>
         <br /><br />
         <div class="buttons">
@@ -304,7 +308,6 @@
                 {% trans 'Go on shopping' %}
             </a>
         </div>
-
     </form>
 {% else %}
     <h1 class="title">

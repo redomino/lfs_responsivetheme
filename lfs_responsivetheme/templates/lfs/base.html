@@ -59,6 +59,9 @@
                     </div>
                     <div class="col-md-4 search text-center">
                         {% include "lfs/search_form.html" %}
+                        <div class="livesearch-wrapper">
+                            <div id="livesearch-result" class="dropdown-menu"></div>
+                        </div>
                     </div>
                     <div class="col-md-4 cart">
                         <div class="pull-right">
@@ -71,9 +74,6 @@
                     </div>
                 {% endblock %}
             </div>
-            <div class="livesearch-wrapper">
-                 <div id="livesearch-result"></div>
-            </div>
         </div>
 
         <div class="header visible-sm visible-xs">
@@ -82,23 +82,23 @@
                         <div class="navbar navbar-default navbar-fixed-top" >
                             <div class="navbar-inner" id="mobile-navbar">
                                 <a href="{% url lfs.core.views.shop_view %}" class="navbar-brand">{{ SHOP.get_meta_title }}</a>
-                                <div class="btn btn-default-group pull-right" data-toggle="buttons-radio">
-                                <button data-target=".user-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
-                                    <span class="icon-user"></span>           
-                                </button>
-                                <button data-target=".search-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
-                                    <span class="icon-search"></span>
-                                </button>
-                                <button data-target=".cart-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
-                                    <span class="icon-briefcase"></span>
-                                </button>
-                                <button data-target=".navbar-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
-                                    <span class="icon-list"></span>
-                                </button>
+                                <div class="btn btn-default-group pull-right clearfix" data-toggle="buttons-radio">
+                                    <button data-target=".user-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                        <span class="icon-user"></span>           
+                                    </button>
+                                    <button data-target=".search-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                        <span class="icon-search"></span>
+                                    </button>
+                                    <button data-target=".cart-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                        <span class="icon-briefcase"></span>
+                                    </button>
+                                    <button data-target=".navbars-collapse" data-toggle="collapse" data-parent="#mobile-navbar" class="btn btn-default" type="button">
+                                        <span class="icon-list"></span>
+                                    </button>
                                 </div>
 
-                                <div class="accordion-group" >
-                                    <div class="navbar-collapse accordion-body collapse">
+                                <div class="accordion-group text-right" >
+                                    <div class="navbars-collapse accordion-body collapse">
                                        {% menu_top_level_categories %}
                                     </div>
 

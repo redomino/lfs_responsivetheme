@@ -1,16 +1,19 @@
 {% load i18n lfs_tags %}
 
+<!--
 {# Voucher #}
-<div class="voucher">
+<div class="voucher col-md-12 clearfix">
     <h2 class="padding-top-large">
         {% trans "Voucher code" %}
     </h2>
+    <div class="col-md-3">
     <input data="{% url lfs_check_voucher %}"
            type="text"
            id="voucher"
            name="voucher"
            value="{{ voucher_number }}"
-           size="30" />
+           size="30" class="form-control"/>
+    </div>
 
     {% if voucher_number and voucher_message %}
         <span class="voucher-message">
@@ -18,9 +21,9 @@
         </span>
     {% endif %}
 </div>
-
-<h2 class="">{% trans 'Your cart' %}</h2>
-<table class="lfs-default cart table">
+-->
+<h2 class="col-md-12">{% trans 'Your cart' %}</h2>
+<table class="table table-condensed">
     <thead>
         <tr>
             <th colspan="2">
@@ -30,10 +33,10 @@
                 colspan="2">
                 {% trans 'Quantity' %}
             </th>
-            <th class="number hidden-sm">
+            <th class="number hidden-all">
                 {% trans 'Net Price' %}
             </th>
-            <th class="number hidden-sm">
+            <th class="number hidden-all">
                 {% trans 'VAT' %}
             </th>
             <th class="number">
@@ -87,10 +90,10 @@
                         </span>
                     {% endif %}
                 </td>
-                <td class="number hidden-sm">
+                <td class="number hidden-all">
                     {{ cart_item.product_price_net|currency:request}}
                 </td>
-                <td class="number">
+                <td class="number hidden-all">
                     {{ cart_item.product_tax|currency:request}}
                 </td>
                 <td class="number">
@@ -109,10 +112,10 @@
                     1
                 </td>
                 <td></td>
-                <td class="number">
+                <td class="number hidden-all">
                     - {{ discount.price_net|currency:request}}
                 </td>
-                <td class="number">
+                <td class="number hidden-all">
                     {% if discount.tax %}
                         (- {{ discount.tax|currency:request}})
                     {% endif %}
@@ -133,10 +136,10 @@
                     1
                 </td>
                 <td></td>
-                <td class="number">
+                <td class="number hidden-all">
                     - {{ voucher_value|currency:request}}
                 </td>
-                <td class="number">
+                <td class="number hidden-all">
                     ({{ voucher_tax|currency:request}})
                 </td>
                 <td class="number">
@@ -154,10 +157,10 @@
                 1
             </td>
             <td></td>
-            <td class="number">
+            <td class="number hidden-all">
                 {{ shipping_price|currency:request}}
             </td>
-            <td></td>
+            <td class="hidden-all"></td>
             <td class="number">
                 {{ shipping_price|currency:request}}
             </td>
@@ -172,10 +175,10 @@
                 1
             </td>
             <td></td>
-            <td class="number">
+            <td class="number hidden-all">
                 {{ payment_price|currency:request}}
             </td>
-            <td></td>
+            <td class="hidden-all"></td>
             <td class="number">
                 {{ payment_price|currency:request}}
             </td>

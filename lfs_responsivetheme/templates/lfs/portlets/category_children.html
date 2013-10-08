@@ -4,7 +4,7 @@
 {% if categories %}
             <ul class="nav">
                 {% for category in categories %}
-                    <li class="level-{{ category.level }} {% if forloop.last %}last{% endif %} {% if category.is_current %} active {% endif %}  " >
+                    <li class="level-{{ category.level }} {% if forloop.last %}last{% endif %} {% if category.is_current %}active{% endif %}" >
                         <a href="{{ category.category.get_absolute_url }}">
                             {{ category.category.name }}
                         </a>

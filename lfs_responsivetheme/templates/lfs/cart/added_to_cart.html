@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block wrapper %}
+    <div class="col-md-12">
     {% if plural %}
         <h1>{% trans 'This products have been added to cart' %}</h1>
     {% else %}
@@ -47,6 +48,7 @@
                     <tr>
                         <td>
                             <a href="{{ product_accessory.accessory.get_absolute_url }}">
+                                 <img src="{{ product_accessory.accessory.get_image.image.url_60x60 }}" alt="{{ product_accessory.accessory.get_name }}" />
                                 {{ product_accessory.accessory.get_name }}
                             </a>
                         </td>
@@ -54,13 +56,13 @@
                             {{ product_accessory.quantity|quantity }}
                         </td>
                         <td class="number">
-                            {{ product_accessory.accessory.get_price|currency:request }}
+                            {{ product_accessory.accessory|get_price:request|currency:request }}
                         </td>
                         <td class="number">
-                            {{ product_accessory.get_price|currency:request }}
+                            {{ product_accessory|get_price:request|currency:request }}
                         </td>
-                        <td class="right">
-                            <a class="btn btn-default"
+                        <td class="text-right">
+                            <a class="btn btn-default add-accessory-link"
                                rel="nofollow"
                                href="{% url lfs_add_accessory_to_cart product_accessory.accessory.id product_accessory.quantity %}">
                                {% trans 'Add' %}
@@ -73,7 +75,7 @@
     {% endif %}
 
     <div class="buttons">
-        <a class="btn btn-default"
+        <a class="btn btn-info pull-right"
            href="{% url lfs_checkout_dispatcher %}">
             {% trans 'Checkout' %}
         </a>
@@ -86,5 +88,6 @@
             {% trans 'Go on shopping' %}
         </a>
     </div>
-
+    <br />
+</div>
 {% endblock %}

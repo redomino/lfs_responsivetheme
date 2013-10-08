@@ -11,21 +11,21 @@
 
 <div class="row">
     <div class="col-md-12">
-        {% include "lfs/catalog/categories/product/products_navigation.html" %}
-
         <div class="pull-right clearfix">
             {% sorting %}
         </div>
+        {% include "lfs/catalog/categories/product/products_navigation.html" %}
     </div>
 </div>
 
-<div id="products">
+<div id="products" >
+    {% with amount_of_cols=products.0|length %}
     <div class="lfs-default row">
         {% for col in products %}
         <ul class="product-row thumbnails clearfix nav">
             {% for product in col %}
-                <li class="product-data col-md-{% widthratio 12 col|length 1 %} ">
-                    <div class="thumbnail">
+            <li class="col-md-{% widthratio 12 amount_of_cols 1 %}">
+                    <div class="thumbnail product-data">
                         <div class="text-center">
                             <a href="{% url lfs.catalog.views.product_view product.slug %}">
                                 {% if product.image.url_200x200 %}
@@ -90,4 +90,16 @@
         </ul>
         {% endfor %}
     </div>
+
+    {% endwith %}
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-right clearfix">
+            {% sorting %}
+        </div>
+        {% include "lfs/catalog/categories/product/products_navigation.html" %}
+    </div>
+</div>
+

@@ -17,7 +17,7 @@
             {% trans "The operation could not be performed because one or more errors occurred. Please see below." %}
         </div>
     {% endif %}
-    <div>
+    <div class="col-md-12">
         <form class="checkout-form postal-address"
               method="post"
               data="{% url lfs_changed_checkout %}"
@@ -46,34 +46,34 @@
                 <tbody>
                     <tr>
                         {# Invoice Address #}
-                        <td width="50%" id="invoice-address-inline">
+                        <td width="50%" id="invoice-address-inline" class="form">
                             {{ invoice_address_inline|safe }}
                         </td>
 
                         {#  Shipping Address #}
-                        <td width="50%">
-                            <div class="shipping-address" id="shipping-address-inline">
-                               {{ shipping_address_inline|safe }}
-                            </div>
+                        <td width="50%" class="shipping-address form" id="shipping-address-inline">
+                            {{ shipping_address_inline|safe }}
                         </td>
                     </tr>
                 </tbody>
             </table>
 
+            {# Payment #}
+            <div class="payment col-md-6">
+                <div id="payment-inline">
+                    {{ payment_inline|safe }}
+                </div>
+            </div>
+
             {# Shipping #}
-            <div class="shipping">
+            <div class="shipping col-md-6">
                 <h2>{% trans 'Shipping' %}</h2>
                 <div id="shipping-inline">
                     {{ shipping_inline|safe }}
                 </div>
             </div>
 
-            {# Payment #}
-            <div class="payment">
-                <div id="payment-inline">
-                    {{ payment_inline|safe }}
-                </div>
-            </div>
+
 
             {% if display_credit_card %}
                  <table id="credit-card">
@@ -235,8 +235,10 @@
                 </table>
             {% endif %}
 
+            <div class="clearfix"></div>
+
             {# Cart #}
-            <div id="cart-inline row">
+            <div id="cart-inline clearfix">
                 {{ cart_inline }}
             </div>
 
@@ -266,10 +268,11 @@
             </div>
             {% endif %}
 
-            <div class="pull-right">
+            <div class="buttons">
+                <br />
                 <a class="btn btn-default"
                    href="{% url lfs.cart.views.cart %}">{% trans 'Go to cart' %}</a>
-                <button class="btn btn-default"
+                <button class="btn btn-info pull-right"
                         type="submit">
                     {% trans 'Submit order' %}
                 </button>
@@ -289,3 +292,11 @@
         </form>
     </div>
 {% endblock %}
+
+{% block local_js %}
+<script type="text/javascript">
+    $('.form').addClass('form-group');
+    $('.form input, .form select, textarea').addClass('form-control');
+</script>
+{% endblock %}
+

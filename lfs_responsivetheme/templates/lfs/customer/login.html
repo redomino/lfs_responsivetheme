@@ -14,12 +14,12 @@
 
 {% block wrapper %}
 
-    <div class="container">
-    <h1 class="">
+    <div class="">
+    <h1 class="col-md-12">
         {% trans 'Please select!' %}
     </h1>
 
-    <div class="login col-md-6">
+    <div class="login col-md-6 col-lg-5">
         <h2 class="authenticate">{% trans 'Login' %}</h2>
 
         <div class="description">
@@ -30,8 +30,9 @@
               action="{% url lfs_login %}"
               method="post" role="form">
             {% csrf_token %}
-
-           {{ login_form }}
+            <div class="form">
+               {{ login_form }}
+            </div>
 
             <input type="hidden"
                    name="action"
@@ -48,7 +49,7 @@
     </div>
 
     {% if not ANON_ONLY %}
-        <div class="register col-md-6">
+        <div class="register col-md-6 col-lg-5 col-lg-offset-2">
             <h2 class="authenticate">{% trans 'Register' %}</h2>
 
             <div class="description">
@@ -58,7 +59,7 @@
             <form action="{% url lfs_login %}"
                   method="post">
                     {% csrf_token %}
-                    <div class="form-wrapper form-group">
+                    <div class="form">
                         {{ register_form }}
                     </div>
                     <input type="hidden"

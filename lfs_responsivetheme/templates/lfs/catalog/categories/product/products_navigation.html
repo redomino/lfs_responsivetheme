@@ -1,41 +1,37 @@
 {% load i18n %}
 {% if pagination.total_pages > 1 %}
-<div class="lfs-pagination">
+<ul class="pagination">
     {% if pagination.first_page %}
-    <span class="first-page">
+    <li class="first-page">
         <a href="{{ pagination.url }}?{{ pagination.getparam }}={{ pagination.first_page }}{{ pagination.getvars }}">{% trans "First page" %}</a>
-    </span>
+    </li>
     {% endif %}
-    {% if pagination.has_prev %}
-    <span class="previous-page">
-        <a href="{{ pagination.url }}?{{ pagination.getparam }}={{ pagination.prev }}{{ pagination.getvars }}">{% trans "Previous page" %}</a>
-    </span>
-    {% endif %}
+    <li class="{% if pagination.has_prev %}enabled{% else %}disabled{% endif %}">
+        <a href="{{ pagination.url }}?{{ pagination.getparam }}={{ pagination.prev }}{{ pagination.getvars }}">&laquo;</a>
+    </li>
 
     {% for p in pagination.page_range %}
       {% if p == pagination.current_page %}
-        <span class="current">{{ p }}</span>
+      <li class="active"><a href="#">{{ p }}<span class="sr-only">(current)</span></a></li>
       {% else %}
-        <a href="{{ pagination.url }}?{{ pagination.getparam }}={{ p }}{{ pagination.getvars }}">{{ p }}</a>
+      <li><a href="{{ pagination.url }}?{{ pagination.getparam }}={{ p }}{{ pagination.getvars }}">{{ p }}</a></li>
       {% endif %}
     {% endfor %}
 
-    {% if pagination.has_next %}
-    <span class="next-page">
-        <a href="{{ pagination.url }}?{{ pagination.getparam }}={{ pagination.next }}{{ pagination.getvars }}">{% trans "Next page" %}</a>
-    </span>
-    {% endif %}
+    <li class="{% if pagination.has_next %}enabled{% else %}disabled{% endif %}">
+        <a href="{{ pagination.url }}?{{ pagination.getparam }}={{ pagination.next }}{{ pagination.getvars }}">&raquo;</a>
+    </li>
 
     {% if pagination.last_page %}
-    <span class="last-page">
+    <li class="last-page">
       <a href="{{ pagination.url }}?{{ pagination.getparam }}={{ pagination.last_page }}{{ pagination.getvars }}">{% trans "Last page" %}</a>
-    </span>
+    </li>
     {% endif %}
 
     {% if pagination.total_text %}
-        <span class="total-text">
+        <li class="total-text">
             ({{ pagination.total_text }})
-        </span>
+        </li>
     {% endif %}
-</div>
+</ul>
 {% endif %}
