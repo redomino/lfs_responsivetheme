@@ -1,61 +1,61 @@
 <div id="invoice-address-inline">
 	<div class="invoice-address">
-	    <div class="control-group"> 
+	    <div class="form-group"> 
 	        <div class="control-label">
 	            {{ form.invoice_firstname.label_tag }} *
 	        </div>
             <div class="controls">
-            	{% if form.invoice_firstname.errors %}<div class="alert alert-error">{{ form.invoice_firstname.errors.as_text}}</div>{% endif %}
+            	{% if form.invoice_firstname.errors %}<div class="alert alert-danger">{{ form.invoice_firstname.errors.as_text}}</div>{% endif %}
                 {{ form.invoice_firstname }}
             </div>
 	    </div>
-	    <div class="control-group">
+	    <div class="form-group">
 	        <div class="control-label">
                 {{ form.invoice_lastname.label_tag }} *
             </div>
             <div class="controls">
-            	{% if form.invoice_lastname.errors %}<div class="alert alert-error">{{ form.invoice_lastname.errors.as_text }}</div>{% endif %}
+            	{% if form.invoice_lastname.errors %}<div class="alert alert-danger">{{ form.invoice_lastname.errors.as_text }}</div>{% endif %}
                 {{ form.invoice_lastname }}
             </div>
 	    </div>
-        <div class="control-group">
+        <div class="form-group">
             <div class="control-label">
                 {{ form.invoice_company_name.label_tag }}{% if settings.LFS_INVOICE_COMPANY_NAME_REQUIRED %}*{% endif %}:
             </div>
             <div class="controls">
-                {% if form.invoice_company_name.errors %}<div class="alert alert-error">{{ form.invoice_company_name.errors.as_text }}</div>{% endif %}
+                {% if form.invoice_company_name.errors %}<div class="alert alert-danger">{{ form.invoice_company_name.errors.as_text }}</div>{% endif %}
                 {{ form.invoice_company_name }}
             </div>
         </div>
         {% for field in address_form %}
-            <div class="control-group">
+            <div class="form-group">
                 <div class="control-label">
                     {{ field.label_tag }}{% if field.field.required %}*{% endif %}:
                 </div>
                 <div class="controls">
-                    {% if field.errors %}<div class="alert alert-error">{{ field.errors.as_text }}</div>{% endif %}
+                    {% if field.errors %}<div class="alert alert-danger">{{ field.errors.as_text }}</div>{% endif %}
                     {{ field }}
                 </div>
             </div>
         {% endfor %}
 		{% if request.user.is_anonymous %}
-		    <div class="control-group">
+		    <div class="form-group">
 		        <div class="control-label">
 		                {{ form.invoice_email.label_tag }}{% if settings.LFS_INVOICE_EMAIL_REQUIRED %}*{% endif %}:
 		        </div>
 		        <div class="controls">
-                            {% if field.invoice_email.errors %}<div class="alert alert-error">{{ form.invoice_email.errors.as_text }}</div>{% endif %}
+                            {% if field.invoice_email.errors %}<div class="alert alert-danger">{{ form.invoice_email.errors.as_text }}</div>{% endif %}
 		            {{ form.invoice_email }}
 		       </div>
 		    </div>
 	    {% endif %}
 	    {% if form.invoice_phone %}
-		    <div class="control-group">
+		    <div class="form-group">
 		        <div class="control-label">
 		            {{ form.invoice_phone.label_tag }}{% if settings.LFS_INVOICE_PHONE_REQUIRED %}*{% endif %}:
 		        </div>
 		        <div class="controls">
-	                    {% if field.invoice_phone %}<div class="alert alert-error">{{ form.invoice_phone.errors.as_text }}</div>{% endif %}
+	                    {% if field.invoice_phone %}<div class="alert alert-danger">{{ form.invoice_phone.errors.as_text }}</div>{% endif %}
 		            {{ form.invoice_phone }}
 		        </div>
 		    </div>

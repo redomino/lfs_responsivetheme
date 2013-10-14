@@ -1,10 +1,10 @@
 {% load i18n %}
 {% if pages %}
-    <div class="pages-portlet portlet">
-        <div class="portlet-header popover-title">
+    <div class="pages-portlet portlet panel panel-default">
+        <div class="portlet-header panel-heading">
             {{ title }}
         </div>
-        <div class="portlet-body popover-content">
+        <div class="portlet-body panel-body">
             {% for page in pages %}
                 <div class="portlet-item {% if forloop.last %}last{% endif %}">
                     <a href="{{page.get_absolute_url}}">
@@ -13,7 +13,7 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="portlet-footer popover-content">
+        <div class="portlet-footer panel-footer">
             <a href="{% url lfs_pages %}">
                 {% trans 'More information' %}
             </a>

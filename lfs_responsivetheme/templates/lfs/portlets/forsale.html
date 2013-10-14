@@ -2,11 +2,11 @@
 {% load lfs_tags %}
 
 {% if products %}
-    <div class="forsale-products-portlet portlet">
-        <div class="portlet-header popover-title">
+    <div class="forsale-products-portlet portlet panel panel-default">
+        <div class="portlet-header panel-heading">
             {{ title }}
         </div>
-        <div class="portlet-body popover-content">
+        <div class="portlet-body panel-body">
             {% if not slideshow %}
                 {% for product in products %}
                 <div class="portlet-item {% if forloop.last %}last{% endif %}">
