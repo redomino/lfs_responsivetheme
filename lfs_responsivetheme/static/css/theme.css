@@ -43,10 +43,6 @@ img.inline {
     max-width: 100%;
 }
 
-.price-disclaimer {
-    display: none;
-}
-
 .for-sale-standard-price {
     text-decoration: line-through;
 }

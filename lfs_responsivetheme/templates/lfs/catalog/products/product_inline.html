@@ -67,13 +67,7 @@
                         {{ product|get_base_price_gross:request|currency:request }} / {{ product.get_base_price_unit }}
                     </h2>
                 {% endif %}
-                <div class="price-disclaimer">
-                    {% if price_includes_tax %}
-                        {% trans 'inc. VAT' %}
-                    {% else  %}
-                        {% trans 'exc. VAT' %}
-                    {% endif %}
-                </div>
+                {% price_vat %}
             {% else %}
                 <div class="standard-price"
                       nowrap="nowrap">
@@ -84,13 +78,7 @@
                         {{ product|get_base_price_gross:request|currency:request }} / {{ product.get_base_price_unit }}
                     </h2>
                 {% endif %}
-                <div class="price-disclaimer">
-                    {% if price_includes_tax %}
-                        {% trans 'inc. VAT' %}
-                    {% else  %}
-                        {% trans 'exc. VAT' %}
-                    {% endif %}
-                </div>
+                {% price_vat %}
             {% endif %}
     </div>
 

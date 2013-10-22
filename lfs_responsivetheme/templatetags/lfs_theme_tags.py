@@ -2,28 +2,13 @@
 from django.core.cache import cache
 from django.template import Library, Node, TemplateSyntaxError
 from django.utils.translation import ugettext as _
-
-#from django.form.util import ErrorList as OriginalErrorList
-#from django.utils.encoding import force_unicode
-#from django.utils.safestring import mark_safe
-
-# portlets imports
 import portlets.utils
 from portlets.models import Slot
-# lfs imports
 import lfs.core.utils
 from lfs.catalog.models import Category
 
+from django.conf import settings
 register = Library()
-
-#class ErrorList(OriginalErrorList):
-#    """ """
-#    def as_ul(self):
-#        if not self: return u''
-#        return mark_safe(u'<ul class="errorlist">%s</ul>'
-#                % ''.join([u'<li>%s%s</li>' % (k, force_unicode(v))
-#                    for k, v in self.items()]))
-
 
 class SlotsInformationNode(Node):
     """
@@ -120,4 +105,16 @@ def menu_top_level_categories(context):
     return {
         "categories": categories,
     }
+
+@register.inclusion_tag('lfs/price_vat.html', takes_context=True)
+def price_vat(context):
+    """Displays the VAT
+    """
+
+    settings.SHOW_VAT = getattr(settings, 'SHOW_VAT', True)
+    if settings.SHOW_VAT:
+        return {'VAT': True}
+    else:
+        return {'VAT': False}
+
 

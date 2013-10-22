@@ -1,4 +1,4 @@
-{% load i18n lfs_tags %}
+{% load i18n lfs_tags lfs_theme_tags %}
 
 {% block products-header %}
 <h1 class="first-heading">
@@ -26,7 +26,7 @@
             {% for product in col %}
             <li class="col-md-{% widthratio 12 amount_of_cols 1 %}">
                     <div class="thumbnail product-data">
-                        <div class="text-center">
+                        <div class="text-center image-container">
                             <a href="{% url lfs.catalog.views.product_view product.slug %}">
                                 {% if product.image.url_200x200 %}
                                     <img alt="{{ product.name }}" class="img-rounded"
@@ -73,13 +73,7 @@
                                         {% endif %}
                                     </div>
                                 {% endif %}
-                                <div class="price-disclaimer">
-                                    {% if product.price_includes_tax %}
-                                        {% trans 'inc. VAT' %}
-                                    {% else  %}
-                                        {% trans 'exc. VAT' %}
-                                   {% endif %}
-                                </div>
+                                {% price_vat %}
                             </h3>
                         </div>
 

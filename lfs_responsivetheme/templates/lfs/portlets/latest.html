@@ -14,13 +14,7 @@
                     </a>
                     <div class="product-price">
                         {{ product.price|currency:request}}
-                        <div class="price-disclaimer">
-                            {% if product.price_includes_tax %}
-                                {% trans 'inc. VAT' %}
-                            {% else  %}
-                                {% trans 'exc. VAT' %}
-                            {% endif %}
-                        </div>
+                        {% price_vat %}
                     </div>
                 </div>
                 {% endfor %}
@@ -44,13 +38,7 @@
 
                             <div class="product-price">
                                 {{ product.price|currency:request}}
-                                <div class="price-disclaimer">
-                                    {% if product.price_includes_tax %}
-                                        {% trans 'inc. VAT' %}
-                                    {% else  %}
-                                        {% trans 'exc. VAT' %}
-                                    {% endif %}
-                                </div>
+                                {% price_vat %}
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load lfs_tags %}
+{% load lfs_theme_tags %}
+{% load lfs_portlets_tags %}
+{% load compress %}
+{% load custom_tags %}
+
+{% if VAT %}
+<div class="price-disclaimer">
+    {% if price_includes_tax %}
+        {% trans 'inc. VAT' %}
+    {% else  %}
+        {% trans 'exc. VAT' %}
+    {% endif %}
+</div>
+{% endif %}

@@ -2,9 +2,13 @@
 <div class="useractions text-right">
 {% if user.is_authenticated %}
     {% if user.first_name %}
-	<span>{{ user.first_name }} {{user.last_name}}</span>
+	    <span>{% trans 'Ciao' %} 
+            <a href="{% url lfs_my_account %}">
+                {{ user.first_name }} {{user.last_name}}
+            </a>
+        </span>
     {% else %}
-	<span>{{ user.username }}</span>
+	<span><a href="{% url lfs_my_account %}">{{ user.username }}</a></span>
     {% endif %} |
 
     {% if user.is_superuser %}
@@ -23,8 +27,7 @@
 	|
     {% endif %}
 
-    <a href="{% url lfs_logout %}">{% trans 'Logout' %}</a> |
-    <a href="{% url lfs_my_account %}">{% trans 'My account' %}</a>
+    <a href="{% url lfs_logout %}">{% trans 'Logout' %}</a> 
 {% else %}
     {% if not ANON_ONLY %}
 	<a href="{% url lfs_login %}">{% trans 'Login' %}</a>
