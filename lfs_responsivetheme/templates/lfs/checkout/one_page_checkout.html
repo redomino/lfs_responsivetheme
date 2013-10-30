@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block wrapper %}
+
     {% if form.errors %}
         <div class="form-errors alert alert-error">
             {% trans "The operation could not be performed because one or more errors occurred. Please see below." %}
@@ -238,7 +239,7 @@
             <div class="clearfix"></div>
 
             {# Cart #}
-            <div id="cart-inline clearfix">
+            <div id="cart-inline" class="clearfix">
                 {{ cart_inline }}
             </div>
 

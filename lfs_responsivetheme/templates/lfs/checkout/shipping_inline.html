@@ -6,12 +6,12 @@
                     src="{{ shipping_method.image.url }}"
                     alt="{{ shipping_method.name }}">
             </div>
-        {% endif  %}
+        {% endif %}
         <label class="radio pull-left">
             <input type="radio"
                    name="shipping-method"
                    class="update-checkout"
-                   {% ifequal shipping_method.id selected_shipping_method.id  %}checked="checked"{% endifequal %}
+                   {% ifequal shipping_method.id selected_shipping_method.id %}checked="checked"{% endifequal %}
                    value="{{shipping_method.id}}"
                    id="shipping-method-{{shipping_method.id}}" />
             {{ shipping_method.name }}

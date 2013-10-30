@@ -32,3 +32,16 @@ def widget__init__(self, attrs=None, render_value=False):
     super(PasswordInput, self).__init__(attrs)
     self.render_value = render_value
 PasswordInput.__init__ = widget__init__
+
+
+from django.forms.widgets import Textarea
+def widget__init__(self, attrs=None):
+    # The 'rows' and 'cols' attributes are required for HTML correctness.
+    #import pdb;pdb.set_trace()
+    default_attrs = {'cols': '40', 'rows': '10'}
+    default_attrs.update({'class':'form-control'})
+    if attrs:
+        default_attrs.update(attrs)
+    super(Textarea, self).__init__(default_attrs)
+Textarea.__init__ = widget__init__
+
