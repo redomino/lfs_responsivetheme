@@ -2,6 +2,10 @@ body {
     padding-top: 20px;
 }
 
+table.table td.fixed-width {
+    max-width: 610px;
+}
+
 h1, h2, h3 {
     margin-top: 10px;
 }

@@ -81,8 +81,6 @@
                 </td>
                 <td class="number">
                     {{ cart_item.quantity }}
-                </td>
-                <td class="padding-left hidden-sm">
                     {{ cart_item.product.get_unit }}
                     {% if cart_item.product.get_active_packing_unit %}
                         <span class="packing-unit">
