@@ -117,4 +117,10 @@ def price_vat(context):
     else:
         return {'VAT': False}
 
+@register.inclusion_tag('lfs/toc.html', takes_context=True)
+def toc_link(context):
+    """ show toc checkbox """
 
+    settings.TOC_PAGE_URL = getattr(settings, 'TOC_PAGE_URL', '/term-and-conditions')
+    return {'url':settings.TOC_PAGE_URL}
+    
