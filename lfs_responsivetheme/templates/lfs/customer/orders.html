@@ -20,18 +20,22 @@
             {% trans "You haven't any orders yet." %}
         </p>
     {% else %}
-        <div class="site-actions">
+        <div class="site-actions col-md-4">
             <form action="{% url lfs_my_orders %}"
-                  method="post">
-                {% csrf_token %}
-                <select name="date-filter">
-                    <option value="">{% trans 'All' %}</option>
-                    {% for option in options %}
-                        <option value="{{ option.value }}" {% if option.selected %}selected="selected"{% endif %}>{% blocktrans count counter=option.value %}{{ counter }} month{% plural %}{{ counter }} months{% endblocktrans %}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit"
-                       value="{% trans 'Filter' %}">
+                  method="post" class="form-inline">
+                <div class="form-group">
+                    {% csrf_token %}
+                    <select name="date-filter" class="form-control">
+                        <option value="">{% trans 'All' %}</option>
+                        {% for option in options %}
+                            <option value="{{ option.value }}" {% if option.selected %}selected="selected"{% endif %}>{% blocktrans count counter=option.value %}{{ counter }} month{% plural %}{{ counter }} months{% endblocktrans %}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="form-control"
+                           value="{% trans 'Filter' %}">
+                </div>
             </form>
         </div>
 
