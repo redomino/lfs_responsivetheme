@@ -12,7 +12,7 @@
           action="{% url lfs.cart.views.refresh_cart %}"
           onsubmit="return false;">
 
-        <table class="lfs-default table">
+        <table class="lfs-default table hidden-xs">
             <tr>
                 <th colspan="2">
                     {% trans 'Product' %}
@@ -271,6 +271,215 @@
                 </td>
             </tr>
         </table>
+
+        <table class="lfs-default visible-xs table">
+            <tr>
+                <th >
+                    {% trans 'Product' %}
+                </th>
+                <th class="left">
+                    {% trans 'Quantity' %}
+                </th>
+                <th class="number text-right" colspan="2">
+                    {% trans 'Total' %}
+                </th>
+            </tr>
+
+            {% for cart_item in cart_items %}
+                <tr>
+                    <td>
+                        <span class="product-title">
+                            <a href="{{ cart_item.product.get_absolute_url }}">
+                                {{ cart_item.product.get_name }}
+                            </a>
+                        </span>
+                        {% for property in cart_item.product.get_variant_properties %}
+                            <div>
+                                {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+                            </div>
+                        {% endfor %}
+
+                        {% for property in cart_item.product.get_displayed_properties %}
+                            <div>
+                                {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+                            </div>
+                        {% endfor %}
+
+                        {% if cart_item.product.is_configurable_product %}
+                            {% for property in cart_item.obj.get_properties %}
+                                <div>
+                                    {{ property.title }}: {{ property.value }} {{ property.unit|safe }}
+                                    {% if property.obj.is_select_field and property.display_price %}
+                                        ({{ property.price|currency:request }})
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </td>
+                    <td class="number">
+                        <div class="col-md-3">
+                        <input class="number cart-amount form-control"
+                               type="text"
+                               name="amount-cart-item_{{ cart_item.obj.id }}"
+                               size="6"
+                               value="{{ cart_item.quantity }}" />
+                        </div>
+                    </td>
+                    <td class="hidden-all">
+                        {% if cart_item.product.get_unit %}
+                            <span class="product-unit">
+                                {{ cart_item.product.get_unit }}
+                            </span>
+                        {% endif %}
+                        {% if cart_item.product.get_active_packing_unit %}
+                            <span class="packing-unit">
+                                ({{ cart_item.obj|packages }} {{ cart_item.product.get_packing_info.1 }})
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td class="number hidden-all"
+                        nowrap="nowrap">
+                        {% if cart_item.product.for_sale %}
+                            {{ cart_item.product.for_sale_price|currency:request }}
+                        {% else %}
+                            {{ cart_item.product.price|currency:request }}
+                        {% endif %}
+                    </td>
+                    <td class="number text-right" colspan="2"
+                        nowrap="nowrap">
+                        {{ cart_item.product_price_gross|currency:request }}
+                        <a href="{% url lfs_delete_cart_item cart_item.obj.id %}"
+                           title="{% trans 'Delete item' %}"
+                           class="delete-button delete-cart-item"><i class="icon-remove"></i></a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for discount in discounts %}
+                <tr id="discounts-display">
+                    <td></td>
+                    <td class="left">
+                        {{ discount.name }}
+                    </td>
+                    <td class="number">
+                        1
+                    </td>
+                    <td class="number">
+
+                    </td>
+                    <td class="number hidden-all">
+                        - {{ discount.price_net|currency:request }}
+                    </td>
+                    <td class="number">
+                        - {{ discount.price_gross|currency:request }}
+                    </td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+
+            {% if display_voucher %}
+            <tr id="voucher-display" class="{% if display_voucher %}success{% endif %}">
+                    <td></td>
+                    <td class="product-title left">
+                        {% trans "Voucher" %}
+                    </td>
+                    <td class="number">
+                        1
+                    </td>
+                    <td></td>
+                    <td class="number hidden-all">
+                        - {{ voucher_value|currency:request }}
+                    </td>
+                    <td class="number">
+                        - {{ voucher_value|currency:request }}
+                    </td>
+                    <td></td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td class="left">
+                    {% trans 'Country' %}:
+                </td>
+                <td colspan="3">
+                    <select class="cart-country form-control"
+                            name="country" >
+                        {% for country in countries %}
+                            <option {% ifequal country.code selected_country.code  %}selected="selected"{% endifequal %}
+                                    value="{{ country.code }}">
+                                {{ country.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="left">
+                    {% trans 'Shipping' %}:
+                </td>
+                <td colspan="2">
+                    <select class="cart-shipping-method form-control"
+                            name="shipping_method">
+                        {% for shipping_method in shipping_methods %}
+                            <option {% ifequal shipping_method.id selected_shipping_method.id  %}selected="selected"{% endifequal %}
+                                    value="{{ shipping_method.id }}">
+                                {{ shipping_method.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td class="number text-right"
+                    nowrap="nowrap">
+                    {{ shipping_price|currency:request }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="left">
+                    {% trans 'Payment' %}:
+                </td>
+                <td colspan="2">
+                    <select class="cart-payment-method form-control"
+                            name="payment_method" >
+                        {% for payment_method in payment_methods %}
+                            <option {% ifequal payment_method.id selected_payment_method.id  %}selected="selected"{% endifequal %}
+                                    value="{{ payment_method.id }}">
+                                {{ payment_method.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td class="number text-right"
+                    nowrap="nowrap">
+                    {{ payment_price|currency:request }}
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="1"
+                    class="total left padding-top">
+                    {% trans 'Total' %}:
+                </td>
+                <td colspan="3" class="text-right"
+                    nowrap="nowrap">
+                    {{ cart_price|currency:request }}
+                </td>
+            </tr>
+            <tr class="delivery_time">
+                <td colspan="4"
+                    class="discreet left padding-top">
+                    {% trans 'Total delivery time' %}: {{ max_delivery_time }}
+                </td>
+            </tr>
+            <tr class="VAT">
+                <td colspan="4"
+                    class="text-left">
+                    {% trans 'All prices are in euros. VAT is included' %}
+                </td>
+            </tr>
+        </table>
+
 
 
         <div class="row">
