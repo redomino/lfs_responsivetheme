@@ -7,8 +7,13 @@
           <div class="input-group">
               <input id="search-input" class="form-control" value="{{ q }}" type="text" name="q" autocomplete="off" data-url="{% url lfs_livesearch %}" />
               <span class="input-group-btn">
-                  <button class="btn btn-default" type="button"><i class="icon-search"></i></button>
+                  <button class="btn btn-default" type="button">{% trans 'Search' %}</button>
               </span>
+<!--
+              <span class="input-group-addon">
+                  <i class="icon-search"></i>
+              </span>
+-->
           </div>
       </div>
       <input type="hidden" name="livesearch" value="1" />

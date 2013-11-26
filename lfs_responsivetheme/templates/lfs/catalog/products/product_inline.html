@@ -111,7 +111,6 @@
                                 <select class="cp-property form-control"
                                         name="property-{{ property.id }}">
                                     {% if not property.obj.required %}
-                                        <option>---</option>
                                     {% endif %}
                                     {% for option in property.options %}
                                         <option value="{{ option.id }}"
