@@ -20,7 +20,7 @@
             {% trans "The operation could not be performed because one or more errors occurred. Please see below." %}
         </div>
     {% endif %}
-    <form class="address-form postal-address"
+    <form class="address-form postal-address form-inline"
           action="{% url lfs_my_addresses %}"
           method="post"
           invoice="{% url lfs_changed_invoice_country %}"
