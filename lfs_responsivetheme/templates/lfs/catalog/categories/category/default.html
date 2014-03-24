@@ -11,29 +11,54 @@
     {% for row in categories %}
         <ul class="category-row row clearfix nav">
             {% for category in row %}
+                {% if row|length > 1  %}
                 <li class="category-data col-md-{% widthratio 12 row|length 1 %} ">
                     <div class="thumbnail col-md-12 clearfix">
                         {% if category.get_image %}
-                        <div class="category-image col-md-3 text-center">
+                        <div class="text-center image-container">
                             <a href="{% url lfs_category category.slug %}">
-                                <img src="{{ category.get_image.url_100x100 }}"
+                                <img src="{{ category.get_image.url_200x200 }}"
                                      alt="{{ category.name }}" />
                             </a>
                         </div>
                         {% endif %}
-                        <div class="col-md-9">
-                            <h3 class="first-heading">{{ category.name }}</h3>
+                        <div class="caption text-center">
+                            <h3 class="product-title">
+                                <a href="{% url lfs_category category.slug %}">
+                                    {{ category.name }}
+                                </a>
+                            </h3>
                             <div class="category-description">
                                 {{ category.short_description|safe }}
-                            </div>
-                            <div class="details-button">
-                                <a class="btn btn-default"
-                                   href="{% url lfs_category category.slug %}">{% trans 'Details' %}
-                                </a>
                             </div>
                         </div>
                     </div>
                 </li>
+                {% endif %}
+                {% if row|length == 1 %}
+                <li class="category-data col-md-{% widthratio 12 row|length 1 %} ">
+                    <div class="thumbnail col-md-12 clearfix">
+                        {% if category.get_image %}
+                        <div class="text-center image-container pull-left">
+                            <a href="{% url lfs_category category.slug %}">
+                                <img src="{{ category.get_image.url_200x200 }}"
+                                     alt="{{ category.name }}" />
+                            </a>
+                        </div>
+                        {% endif %}
+                        <div class="caption text-left">
+                            <h3 class="product-title">
+                                <a href="{% url lfs_category category.slug %}">
+                                    {{ category.name }}
+                                </a>
+                            </h3>
+                            <div class="category-description">
+                                {{ category.short_description|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
             {% endfor %}
         </ul>
     {% endfor %}

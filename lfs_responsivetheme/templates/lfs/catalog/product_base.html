@@ -27,8 +27,6 @@
 
 {% block content %}
 
-    {{ product.static_block.html|safe }}
-
     <!-- {% product_navigation product %} -->
 
     <div id="product-form-wrapper">
@@ -71,6 +69,9 @@
     {% endif %}
 
     {% related_products_by_tags product %}
+
+    {{ product.static_block.html|safe }}
+
 
 {% endblock %}
 

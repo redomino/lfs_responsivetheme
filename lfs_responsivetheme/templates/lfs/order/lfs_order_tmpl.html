@@ -59,10 +59,7 @@
 <table class="order table">
     <thead>
         <tr>
-            <th width="25%">
-                {% trans 'Invoice address' %}
-            </th>
-            <th width="25%">
+            <th width="50%">
                 {% trans 'Shipping address' %}
             </th>
             <th width="25%">
@@ -75,35 +72,6 @@
     </thead>
     <tbody>
         <tr>
-            <td>
-                <div>
-                    {{ current_order.invoice_firstname }}
-                </div>
-                <div>
-                    {{ current_order.invoice_lastname }}
-                </div>
-                <div>
-                    {{ current_order.invoice_line1 }}
-                </div>
-                <div>
-                    {{ current_order.invoice_line2 }}
-                </div>
-                <div>
-                    {{ current_order.invoice_city }}
-                </div>
-                <div>
-                    {{ current_order.invoice_state }}
-                </div>
-                <div>
-                    {{ current_order.invoice_code }}
-                </div>
-                <div>
-                    {{ current_order.invoice_country }}
-                </div>
-                <div>
-                    {{ current_order.invoice_phone }}
-                </div>
-            </td>
             <td>
                 <div>
                     {{ current_order.shipping_firstname }}
