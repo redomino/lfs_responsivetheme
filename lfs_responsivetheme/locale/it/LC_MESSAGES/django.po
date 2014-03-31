@@ -168,7 +168,7 @@ msgstr "Vai al carrello"
 #: templates/lfs/checkout/empty_page_checkout.html:21
 #: templates/lfs/contact/contact_form_sent.html:20
 msgid "Go on shopping"
-msgstr "Vai al negozio"
+msgstr "Continua gli acquisti"
 
 #: templates/lfs/cart/added_to_cart_items.html:7
 #: templates/lfs/cart/added_to_cart_items.html:10

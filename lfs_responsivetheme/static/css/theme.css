@@ -51,6 +51,11 @@ img.inline {
     text-decoration: line-through;
 }
 
+.category .for-sale-standard-price {
+    font-size: 16px;
+    color: red;
+}
+
 .hidden-all {
     display: none;
 }
